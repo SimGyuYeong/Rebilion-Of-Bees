@@ -26,7 +26,7 @@ public class BeeUpgrade : IShopItem
     public void Upgrade()
     {
         bee.level += 1;
-        bee.damage += addDamage;
+        Bee.ApplyDamage(addDamage);
         panel.Refresh(bee, this);
     }
 

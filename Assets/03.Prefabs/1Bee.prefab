@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1585528212086601293}
   - component: {fileID: 5034841360927457978}
   - component: {fileID: 2214745473692313028}
-  - component: {fileID: 4226683027724763799}
+  - component: {fileID: 7579422424874192295}
   m_Layer: 0
   m_Name: 1Bee
   m_TagString: Untagged
@@ -57,7 +57,7 @@ MonoBehaviour:
   damage: 5
   attackType: "\uADFC\uC811"
   info: "\uD14C\uC2A4\uD2B8"
-  icon: {fileID: 4226683027724763799}
+  icon: {fileID: 7579422424874192295}
 --- !u!222 &2214745473692313028
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5034841360927457977}
   m_CullTransparentMesh: 1
---- !u!114 &4226683027724763799
+--- !u!114 &7579422424874192295
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

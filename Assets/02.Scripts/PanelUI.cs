@@ -10,7 +10,10 @@ public class PanelUI : MonoBehaviour
     private TextMeshProUGUI _levelText;
     private TextMeshProUGUI _priceText;
     private TextMeshProUGUI _damageText;
-    private Image icon;
+    private Image _icon;
+    private int _slot;
+
+    private Shop _shop;
 
     private void Awake()
     {
@@ -18,7 +21,9 @@ public class PanelUI : MonoBehaviour
         _levelText = transform.Find("level").GetComponent<TextMeshProUGUI>();
         _priceText = transform.Find("Button/price").GetComponent<TextMeshProUGUI>();
         _damageText = transform.Find("damage").GetComponent<TextMeshProUGUI>();
-        icon = transform.Find("Icon").GetComponent<Image>();
+        _icon = transform.Find("Icon").GetComponent<Image>();
+
+        _shop = transform.parent.parent.parent.GetComponent<Shop>();
     }
 
     public void Refresh(Bee bee, BeeUpgrade upgrade)
@@ -27,6 +32,12 @@ public class PanelUI : MonoBehaviour
         _levelText.text = bee.level.ToString();
         _priceText.text = upgrade.price.ToString();
         _damageText.text = bee.damage.ToString();
-        icon = bee.icon;
+        _icon.sprite = bee.icon.sprite;
+        _slot = upgrade.slot;
+    }
+
+    public void Purchase()
+    {
+        _shop.Purchase(_slot);
     }
 }

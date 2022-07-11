@@ -6,6 +6,14 @@ public class BeeShop : Shop
 {
     public List<BeeUpgrade> beeList = new List<BeeUpgrade> ();
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            Instantiate(beeList[0].bee, transform);
+        }
+    }
+
     protected override void Init()
     {
         int _slot = 0;
