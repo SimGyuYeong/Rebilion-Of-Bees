@@ -52,8 +52,25 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                 ItemInform item_1 = slot.GetChild(0).GetComponent<ItemInform>();
                 ItemInform item_2 = slot.GetChild(1).GetComponent<ItemInform>();
 
-                if (item_1._itemType == ItemType.EGG && item_2._itemType == ItemType.EGG)
+                if (item_1._itemType == ItemType.EGG || item_2._itemType == ItemType.EGG)
                 {
+                    if (item_1._itemType == ItemType.EGG && item_2._itemType == ItemType.EGG)
+                    {
+                        return;
+                    }
+
+                    if (item_1._itemType == ItemType.EGG)
+                    {
+                        item_1._itemType = ItemType.BEE;
+                        item_1._itemGrade = item_2._itemGrade;
+                    }
+                    else
+                    {
+                        item_2._itemType = ItemType.BEE;
+                        item_2._itemGrade = item_1._itemGrade;
+                    }
+
+                    Destroy(item_2.gameObject);
                     return;
                 }
 
