@@ -13,14 +13,6 @@ public class Bee : MonoBehaviour
     public string info; // 설명
     public Image icon; // 아이콘
 
-    public void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-            Debug.Log(damage);
-        }
-    }
-
     public static void ApplyDamage(long damage)
     {
         foreach(var bee in FindObjectsOfType<Bee>())
