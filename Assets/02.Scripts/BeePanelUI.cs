@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class PanelUI : MonoBehaviour
+public class BeePanelUI : MonoBehaviour
 {
     private TextMeshProUGUI _nameText;
     private TextMeshProUGUI _levelText;

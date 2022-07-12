@@ -6,7 +6,7 @@ using UnityEngine;
 public class BeeUpgrade : IShopItem
 {
     public Bee bee; // 벌 정보
-    public PanelUI panel; // 패널 정보
+    public BeePanelUI panel; // 패널 정보
     public int slot = 0; // 슬롯 번호
     public long price = 0; // 가격
     public long level = 0; // 레벨
