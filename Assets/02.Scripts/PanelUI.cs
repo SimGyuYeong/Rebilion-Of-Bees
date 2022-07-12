@@ -25,7 +25,7 @@ public class PanelUI : MonoBehaviour
         _nameText = transform.Find("name").GetComponent<TextMeshProUGUI>();
         _levelText = transform.Find("level").GetComponent<TextMeshProUGUI>();
         _priceText = transform.Find("Button/price").GetComponent<TextMeshProUGUI>();
-        _damageText = transform.Find("damage").GetComponent<TextMeshProUGUI>();
+        _damageText = transform.Find("Damage/Value").GetComponent<TextMeshProUGUI>();
         _buttonImage = transform.Find("Button").GetComponent<Image>();
         _icon = transform.Find("Icon").GetComponent<Image>();
 
