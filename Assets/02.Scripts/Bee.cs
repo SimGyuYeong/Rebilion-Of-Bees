@@ -16,11 +16,11 @@ public class Bee : MonoBehaviour
     public string info; // 설명
     public Image icon; // 아이콘
 
-    public static void ApplyDamage(long damage)
+    public static void ApplyDamage(long damage, string beeName)
     {
         foreach(var bee in FindObjectsOfType<Bee>())
         {
-            bee.damage += damage;
+            if(bee.beeName == beeName) bee.damage += damage;
         }
     }
 
