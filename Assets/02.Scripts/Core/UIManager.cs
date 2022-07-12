@@ -1,11 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using DG.Tweening;
-using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    public GameObject optionPanel = null;
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OptionPanelControl();
+        }
+    }
 
+    public void OptionPanelControl()
+    {
+        optionPanel.SetActive(!optionPanel.activeSelf);
+        if (optionPanel.activeSelf == true)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
 }
