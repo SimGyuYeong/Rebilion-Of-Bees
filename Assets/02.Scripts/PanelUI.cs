@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class PanelUI : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class PanelUI : MonoBehaviour
     private int _slot;
 
     private Shop _shop;
+    private Bee _bee;
+
+    public UnityEvent<Bee> InfoButtonClickEvent;
 
     private void Awake()
     {
@@ -38,10 +42,16 @@ public class PanelUI : MonoBehaviour
         _slot = upgrade.slot;
         
         _buttonImage.color = upgrade.IsPurchase() ? Color.white : Color.gray;
+        _bee = bee;
     }
 
     public void Purchase()
     {
         _shop.Purchase(_slot);
+    }
+
+    public void InfoButtonClick()
+    {
+        InfoButtonClickEvent?.Invoke(_bee);
     }
 }
