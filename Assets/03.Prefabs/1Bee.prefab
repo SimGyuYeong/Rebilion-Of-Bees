@@ -52,11 +52,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beeName: Base
-  type: Ice
+  honeyType: "\uC5F0\uD55C\uB178\uB780\uC0C9 \uAFC0"
   level: 1
   damage: 5
-  attackType: "\uADFC\uC811"
-  info: "\uD14C\uC2A4\uD2B8"
+  attackSpeed: 1
+  critical: 10
+  honeyAmount: 1
+  rangeType: "\uC911\uAC70\uB9AC"
+  info: "\uADC0\uC5EC\uC6B4 \uAFC0\uBC8C\uC774\uC5D0\uC6A9~!!"
   icon: {fileID: 7579422424874192295}
 --- !u!222 &2214745473692313028
 CanvasRenderer:

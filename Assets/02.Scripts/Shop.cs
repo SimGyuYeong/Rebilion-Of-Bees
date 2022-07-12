@@ -6,7 +6,7 @@ public class Shop : MonoBehaviour
 { 
     protected List<IShopItem> _itemList = new List<IShopItem>();
 
-    public PanelUI panelTemplate;
+    public BeePanelUI panelTemplate;
     protected Transform _contentTrm;
 
     private void Awake()
@@ -17,7 +17,7 @@ public class Shop : MonoBehaviour
 
     protected virtual void Init()
     {
-
+        //do nothing!
     }
 
     /// <summary>
