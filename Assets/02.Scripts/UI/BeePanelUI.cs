@@ -13,7 +13,7 @@ public class BeePanelUI : MonoBehaviour
     private TextMeshProUGUI _damageText;
     private Image _buttonImage;
     private Image _icon;
-    private int _slot;
+    public int slot;
     private GameObject _notgetPanel;
 
     private Shop _shop;
@@ -54,7 +54,6 @@ public class BeePanelUI : MonoBehaviour
             _priceText.text = upgrade.GetPrice().ToString();
             _damageText.text = bee.damage.ToString();
             _icon.sprite = bee.icon.sprite;
-            _slot = upgrade.slot;
 
             _buttonImage.color = upgrade.IsPurchase() ? Color.white : Color.gray;
             _bee = bee;
@@ -66,7 +65,7 @@ public class BeePanelUI : MonoBehaviour
     /// </summary>
     public void Purchase()
     {
-        _shop.Purchase(_slot);
+        _shop.Purchase(slot);
     }
 
     /// <summary>

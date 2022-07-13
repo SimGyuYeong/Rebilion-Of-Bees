@@ -19,11 +19,6 @@ public class UpgradePanelUI : MonoBehaviour
         _buttonImage = transform.Find("Button").GetComponent<Image>();
     }
 
-    private void Start()
-    {
-        Refresh(GetComponent<ETCUpgrade>());
-    }
-
     public void Refresh(ETCUpgrade upgrade)
     {
         _priceText.text = upgrade.GetPrice().ToString();

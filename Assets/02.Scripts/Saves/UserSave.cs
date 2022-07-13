@@ -141,13 +141,20 @@ public class UserSave
         _beeLvList[index] = value;
         GameManager.Instance._saveManager.SaveBeeInfos(_beeLvList);
     }
-
+    public int GetBeeLvList(int index)
+    {
+        return _beeLvList[index];
+    }
     [SerializeField] private List<int> _shopItemLvList = new List<int>();
 
     public void ChangeShopItemInfo(int index, int value)
     {
         _shopItemLvList[index] = value;
         GameManager.Instance._saveManager.SaveShopItemInfos(_shopItemLvList);
+    }
+    public int GetShopItemLvList(int index)
+    {
+        return _shopItemLvList[index];
     }
 
     /// <summary>
@@ -171,17 +178,27 @@ public class UserSave
         USER_MAXEGG = 10;
         USER_MAXBEECOUNT = 5;
 
+        PlayerPrefs.DeleteKey("TowerInfoJsonStr");
+        PlayerPrefs.DeleteKey("BeeInfoJsonStr");
+        PlayerPrefs.DeleteKey("ShopItemJsonStr");
+
         _towerInformList.Clear();
+        GameManager.Instance._saveManager.SaveTowerInfos(_towerInformList);
 
-        for (int i = 0; i < _beeLvList.Count; i++)
+        _beeLvList.Clear();
+        _beeLvList.Add(1);
+        for (int i = 0; i < 9; i++)
         {
-            _beeLvList[i] = 0;
+            _beeLvList.Add(0);
         }
+        GameManager.Instance._saveManager.SaveBeeInfos(_beeLvList);
 
-        for (int i = 0; i < _shopItemLvList.Count; i++)
+        _shopItemLvList.Clear();
+        for (int i = 0; i < 13; i++)
         {
-            _shopItemLvList[i] = 0;
+            _shopItemLvList.Add(0);
         }
+        GameManager.Instance._saveManager.SaveShopItemInfos(_shopItemLvList);
     }
 
     public UserSave() { }

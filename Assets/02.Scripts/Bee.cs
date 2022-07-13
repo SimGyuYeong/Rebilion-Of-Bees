@@ -7,8 +7,8 @@ public class Bee : MonoBehaviour
 {
     public string beeName; // 벌 이름
     public string honeyType; // 꿀 속성
-    public long level; // 레벨
-    public long damage; // 공격력
+    public int level; // 레벨
+    public int damage; // 공격력
     public float attackSpeed; // 공격속도
     public float critical; // 크리티컬 확률
     public int honeyAmount; // 출장시 지급될 꿀량
@@ -17,7 +17,7 @@ public class Bee : MonoBehaviour
     public bool isGet; // 해당 벌을 얻었는가?
     public Image icon; // 아이콘
 
-    public static void ApplyDamage(long damage, string beeName)
+    public static void ApplyDamage(int damage, string beeName)
     {
         foreach(var bee in FindObjectsOfType<Bee>())
         {

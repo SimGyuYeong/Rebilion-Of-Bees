@@ -9,7 +9,7 @@ public interface IShopItem
     /// 가격 구하는 함수
     /// </summary>
     /// <returns></returns>
-    public long GetPrice();
+    public int GetPrice();
 
     /// <summary>
     /// 구매가 가능한지 구하는 함수

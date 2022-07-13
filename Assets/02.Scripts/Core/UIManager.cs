@@ -17,9 +17,7 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI _goldText;
     private TextMeshProUGUI _royalText;
 
-    private int stage = 84;
-    private int money = 198451;
-    private int royal = 100;
+    private int stage, money, royal;
 
     private void Awake()
     {
@@ -30,6 +28,10 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        stage = 1;
+        money = GameManager.Instance._saveManager._userSave.USER_HASMONEY;
+        royal = 1;
+
         TopPanelUpdate();
     }
 

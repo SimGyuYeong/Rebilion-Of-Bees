@@ -12,6 +12,11 @@ public class Shop : MonoBehaviour
     private void Awake()
     {
         _contentTrm = transform.Find("Viewport/Content");
+        
+    }
+
+    private void Start()
+    {
         Init();
     }
 
@@ -28,6 +33,7 @@ public class Shop : MonoBehaviour
     {
         if (_itemList[slot].IsPurchase())
         {
+            GameManager.Instance._saveManager._userSave.USER_HASMONEY -= _itemList[slot].GetPrice();
             _itemList[slot].Upgrade();
         }
     }

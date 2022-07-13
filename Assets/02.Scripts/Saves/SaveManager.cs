@@ -25,7 +25,7 @@ public class SaveManager : MonoBehaviour
             _isLoad = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             ResetSaveFile();
         }
@@ -50,15 +50,12 @@ public class SaveManager : MonoBehaviour
         int maxEgg = PlayerPrefs.GetInt("MaxEgg", 0);
         int maxBeeCount = PlayerPrefs.GetInt("MaxBeeCount", 0);
 
-        // PlayerPrefs.DeleteKey("TowerInfoJsonStr");
         string towerInfoJsonStr = PlayerPrefs.GetString("TowerInfoJsonStr", "");
         var towerInfos = JsonConvert.DeserializeObject<List<TowerData>>(towerInfoJsonStr);
 
-        // PlayerPrefs.DeleteKey("BeeInfoJsonStr");
         string beeInfoJsonStr = PlayerPrefs.GetString("BeeInfoJsonStr", "");
         var beeInfos = JsonConvert.DeserializeObject<List<int>>(beeInfoJsonStr);
 
-        // PlayerPrefs.DeleteKey("ShopItemJsonStr");
         string shopItemInfoJsonStr = PlayerPrefs.GetString("ShopItemJsonStr", "");
         var shopItemInfos = JsonConvert.DeserializeObject<List<int>>(shopItemInfoJsonStr);
 

@@ -6,6 +6,6 @@ public class AttackSpeed : UpgradeType
 {
     public override void Upgrade()
     {
-
+        
     }
 }

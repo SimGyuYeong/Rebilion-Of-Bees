@@ -6,9 +6,11 @@ public class ETCUpgrade : MonoBehaviour, IShopItem
 {
     public UpgradeType upgradeType;
     public UpgradePanelUI panel;
-    public long defaultPrice = 0;
-    public long price = 0;
-    public long level = 0;
+    public int defaultPrice = 0;
+    public int price = 0;
+    public int level = 0;
+    [Header("½½·Ô¹øÈ£")]
+    public int slot = 0;
 
     private void Awake()
     {
@@ -16,7 +18,13 @@ public class ETCUpgrade : MonoBehaviour, IShopItem
         panel = GetComponent<UpgradePanelUI>();
     }
 
-    public long GetPrice()
+    private void Start()
+    {
+        level = GameManager.Instance._saveManager._userSave.GetShopItemLvList(slot);
+        panel.Refresh(this);
+    }
+
+    public int GetPrice()
     {
         price = defaultPrice + level * 10;
         return price;
@@ -24,13 +32,14 @@ public class ETCUpgrade : MonoBehaviour, IShopItem
 
     public bool IsPurchase()
     {
-        return true;
+        return GetPrice() <= GameManager.Instance._saveManager._userSave.USER_HASMONEY;
     }
 
     public void Upgrade()
     {
         if(IsPurchase())
         {
+            GameManager.Instance._saveManager._userSave.USER_HASMONEY -= GetPrice();
             level++;
             upgradeType.Upgrade();
             panel.Refresh(this);
