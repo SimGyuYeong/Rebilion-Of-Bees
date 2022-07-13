@@ -15,11 +15,8 @@ public class BeeUpgrade : IShopItem
 
     public int GetPrice()
     {
-        if(level != bee.level)
-        {
-            price = defaultPrice + (bee.level - 1) * 10;
-            level = bee.level;
-        }
+        price = defaultPrice + (bee.level - 1) * 10;
+        level = bee.level;
 
         return price;
     }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Bee : MonoBehaviour
 {
     public string beeName; // 벌 이름
-    public string honeyType; // 꿀 속성
+    public Sprite honeyType; // 꿀 속성
     public int level; // 레벨
     public int damage; // 공격력
     public float attackSpeed; // 공격속도
@@ -16,6 +16,13 @@ public class Bee : MonoBehaviour
     public string info; // 설명
     public bool isGet; // 해당 벌을 얻었는가?
     public Image icon; // 아이콘
+
+    private TravelPrice travel;
+
+    private void Awake()
+    {
+        travel = FindObjectOfType<TravelPrice>();
+    }
 
     public static void ApplyDamage(int damage, string beeName)
     {
@@ -27,7 +34,9 @@ public class Bee : MonoBehaviour
 
     public void Travle()
     {
-        honeyAmount += GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY;
+        float price = GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY;
+        price += price * travel.travelAddPercent;
+        honeyAmount += Mathf.RoundToInt(price);
         Destroy(this);
     }
 }

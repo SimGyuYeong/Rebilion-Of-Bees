@@ -9,8 +9,16 @@ public class ETCUpgrade : MonoBehaviour, IShopItem
     public int defaultPrice = 0;
     public int price = 0;
     public int level = 0;
+
+    public enum PriceType
+    {
+        Money,
+        Royal
+    }
+
     [Header("½½·Ô¹øÈ£")]
     public int slot = 0;
+    public PriceType priceType = PriceType.Money;
 
     private void Awake()
     {
@@ -32,15 +40,23 @@ public class ETCUpgrade : MonoBehaviour, IShopItem
 
     public bool IsPurchase()
     {
-        return GetPrice() <= GameManager.Instance._saveManager._userSave.USER_HASMONEY;
+        if (priceType == PriceType.Money)
+            return GetPrice() <= GameManager.Instance._saveManager._userSave.USER_HASMONEY;
+        else
+            return GetPrice() <= GameManager.Instance._saveManager._userSave.USER_HASMONEY;
     }
 
     public void Upgrade()
     {
-        if(IsPurchase())
+        if (IsPurchase())
         {
-            GameManager.Instance._saveManager._userSave.USER_HASMONEY -= GetPrice();
+            if (priceType == PriceType.Money)
+                GameManager.Instance._saveManager._userSave.USER_HASMONEY -= GetPrice();
+            else
+                GameManager.Instance._saveManager._userSave.USER_HASMONEY -= GetPrice();
+
             level++;
+            GameManager.Instance._saveManager._userSave.ChangeShopItemInfo(slot, level);
             upgradeType.Upgrade();
             panel.Refresh(this);
         }

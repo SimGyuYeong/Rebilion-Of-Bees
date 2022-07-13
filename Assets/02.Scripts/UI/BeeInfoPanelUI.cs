@@ -44,6 +44,8 @@ public class BeeInfoPanelUI : MonoBehaviour
         if(transform.localScale == Vector3.zero)
         {
             transform.DOScale(Vector3.one, .3f);
+            _honeyTypeIcon.sprite = _honeyTypeImage.sprite = bee.honeyType;
+
             _nameText.text = bee.beeName;
             _beeImage.sprite = bee.icon.sprite;
             _levelText.text = string.Format($"Lv. {bee.level}");
@@ -52,6 +54,7 @@ public class BeeInfoPanelUI : MonoBehaviour
             _criticalText.text = bee.critical.ToString();
             _attackSpeedText.text = bee.attackSpeed.ToString();
             _rangeTypeText.text = bee.rangeType;
+            
             _honeyAmountText.text = bee.honeyAmount.ToString();
         }
     }

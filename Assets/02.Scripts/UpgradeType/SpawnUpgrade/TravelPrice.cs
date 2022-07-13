@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class TravelPrice : UpgradeType
 {
+    public float travelAddPercent;
+    
+    private void Awake()
+    {
+        travelAddPercent = GameManager.Instance._saveManager._userSave.GetShopItemLvList(9) * addValue;
+    }
+
     public override void Upgrade()
     {
-        // 출장 이익 증가
+
     }
 }

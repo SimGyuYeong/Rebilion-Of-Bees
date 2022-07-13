@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beeName: "\uB178\uB780\uAFC0\uBC8C"
-  honeyType: "\uC0DB\uB178\uB780\uAFC0"
+  honeyType: {fileID: 21300000, guid: 7aa48bfdc3df2794396940388b82bf67, type: 3}
   level: 1
   damage: 260
   attackSpeed: 1.05

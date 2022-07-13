@@ -6,6 +6,7 @@ public class MaxSpawnHaveCount : UpgradeType
 {
     public override void Upgrade()
     {
-        // 공격력 업그레이드
+        GameManager.Instance._saveManager._userSave.USER_MAXEGG++;
+        GameManager.Instance._saveManager._userSave.USER_MAXHONEY++;
     }
 }

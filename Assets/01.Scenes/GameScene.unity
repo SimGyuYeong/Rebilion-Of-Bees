@@ -1622,6 +1622,7 @@ GameObject:
   - component: {fileID: 137725233}
   - component: {fileID: 137725235}
   - component: {fileID: 137725234}
+  - component: {fileID: 137725236}
   m_Layer: 5
   m_Name: HoneyType
   m_TagString: Untagged
@@ -1662,7 +1663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.68301886, b: 0.68301886, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1687,6 +1688,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 137725232}
   m_CullTransparentMesh: 1
+--- !u!114 &137725236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137725232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &143519817
 GameObject:
   m_ObjectHideFlags: 0
@@ -3484,6 +3500,7 @@ MonoBehaviour:
   price: 0
   level: 0
   slot: 9
+  priceType: 0
 --- !u!114 &205320215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3510,6 +3527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   addValue: 1
   info: "\uBC8C\uB4E4\uC774 \uCD9C\uC7A5 \uAC08 \uB54C \uC774\uC775 {}% \uC99D\uAC00"
+  travelAddPercent: 0
 --- !u!1 &207275416
 GameObject:
   m_ObjectHideFlags: 0
@@ -5532,6 +5550,7 @@ MonoBehaviour:
   price: 0
   level: 0
   slot: 0
+  priceType: 0
 --- !u!114 &410612044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6618,7 +6637,7 @@ RectTransform:
   - {fileID: 876614302}
   - {fileID: 598699605}
   m_Father: {fileID: 1714725898}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7632,6 +7651,7 @@ MonoBehaviour:
   price: 0
   level: 0
   slot: 2
+  priceType: 0
 --- !u!114 &539773125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8496,7 +8516,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b9fed4f929e0d450b9495ff47e48c7dc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2e7a4d44b28c5c84388975e6edf9b9be, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8657,6 +8677,7 @@ MonoBehaviour:
   price: 0
   level: 0
   slot: 10
+  priceType: 1
 --- !u!1 &620913288
 GameObject:
   m_ObjectHideFlags: 0
@@ -9816,6 +9837,7 @@ MonoBehaviour:
   price: 0
   level: 0
   slot: 11
+  priceType: 1
 --- !u!1 &679507487
 GameObject:
   m_ObjectHideFlags: 0
@@ -10188,6 +10210,7 @@ MonoBehaviour:
   price: 0
   level: 0
   slot: 6
+  priceType: 1
 --- !u!114 &691435084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10865,7 +10888,7 @@ RectTransform:
   - {fileID: 1755736208}
   - {fileID: 698997378}
   m_Father: {fileID: 1714725898}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12545,6 +12568,7 @@ MonoBehaviour:
   price: 0
   level: 0
   slot: 8
+  priceType: 0
 --- !u!1 &991470167
 GameObject:
   m_ObjectHideFlags: 0
@@ -15464,73 +15488,73 @@ MonoBehaviour:
   - bee: {fileID: 5034841360927457978, guid: be43c791889e9cf40986247d42f21d9b, type: 3}
     panel: {fileID: 0}
     slot: 0
-    defaultPrice: 0
+    defaultPrice: 100
     price: 0
     level: 0
-    addDamage: 5
+    addDamage: 10
   - bee: {fileID: 5034841360927457978, guid: 7cad5d6260b301242b6f6560768bd9e4, type: 3}
     panel: {fileID: 0}
     slot: 0
-    defaultPrice: 0
+    defaultPrice: 110
     price: 0
     level: 0
-    addDamage: 0
+    addDamage: 10
   - bee: {fileID: 5034841360927457978, guid: e092c08774f07134086fab25071681f8, type: 3}
     panel: {fileID: 0}
     slot: 0
-    defaultPrice: 0
+    defaultPrice: 120
     price: 0
     level: 0
-    addDamage: 0
+    addDamage: 10
   - bee: {fileID: 5034841360927457978, guid: 4f094b75c7c3d494d97f68d78dbb9787, type: 3}
     panel: {fileID: 0}
     slot: 0
-    defaultPrice: 0
+    defaultPrice: 130
     price: 0
     level: 0
-    addDamage: 0
+    addDamage: 25
   - bee: {fileID: 5034841360927457978, guid: efe44674e91f0274bafb65dd027ce2c3, type: 3}
     panel: {fileID: 0}
     slot: 0
-    defaultPrice: 0
+    defaultPrice: 140
     price: 0
     level: 0
-    addDamage: 0
+    addDamage: 25
   - bee: {fileID: 5034841360927457978, guid: 11612315e97427d4b97cb390b3ed2072, type: 3}
     panel: {fileID: 0}
     slot: 0
-    defaultPrice: 0
+    defaultPrice: 150
     price: 0
     level: 0
-    addDamage: 0
+    addDamage: 25
   - bee: {fileID: 5034841360927457978, guid: 81786d27524243741972359c27c72c6a, type: 3}
     panel: {fileID: 0}
     slot: 0
-    defaultPrice: 0
+    defaultPrice: 160
     price: 0
     level: 0
-    addDamage: 0
+    addDamage: 30
   - bee: {fileID: 5034841360927457978, guid: 765124386c2a29c45aba2da696e23625, type: 3}
     panel: {fileID: 0}
     slot: 0
-    defaultPrice: 0
+    defaultPrice: 250
     price: 0
     level: 0
-    addDamage: 0
+    addDamage: 30
   - bee: {fileID: 5034841360927457978, guid: d85cabb63f8a73e46939dedafd44d758, type: 3}
     panel: {fileID: 0}
     slot: 0
-    defaultPrice: 0
+    defaultPrice: 300
     price: 0
     level: 0
-    addDamage: 0
+    addDamage: 40
   - bee: {fileID: 5034841360927457978, guid: 2fb293db8c941624782bb8b67acf865b, type: 3}
     panel: {fileID: 0}
     slot: 0
-    defaultPrice: 0
+    defaultPrice: 350
     price: 0
     level: 0
-    addDamage: 0
+    addDamage: 40
 --- !u!114 &1205623259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16218,6 +16242,7 @@ MonoBehaviour:
   price: 0
   level: 0
   slot: 12
+  priceType: 1
 --- !u!1 &1267700035
 GameObject:
   m_ObjectHideFlags: 0
@@ -16412,7 +16437,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b9fed4f929e0d450b9495ff47e48c7dc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b3570a7b9e21b8439cc8c8f3b20a925, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -20973,6 +20998,7 @@ MonoBehaviour:
   price: 0
   level: 0
   slot: 7
+  priceType: 0
 --- !u!114 &1576234241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21676,6 +21702,7 @@ MonoBehaviour:
   price: 0
   level: 0
   slot: 1
+  priceType: 0
 --- !u!114 &1666589279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22187,8 +22214,8 @@ RectTransform:
   m_Children:
   - {fileID: 217444841}
   - {fileID: 196423857}
-  - {fileID: 492662218}
   - {fileID: 805330833}
+  - {fileID: 492662218}
   - {fileID: 1245141090}
   m_Father: {fileID: 1141435893}
   m_RootOrder: 0
@@ -23422,6 +23449,7 @@ MonoBehaviour:
   price: 0
   level: 0
   slot: 4
+  priceType: 0
 --- !u!114 &1770057299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24081,6 +24109,7 @@ MonoBehaviour:
   price: 0
   level: 0
   slot: 3
+  priceType: 0
 --- !u!114 &1822745410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26404,6 +26433,7 @@ MonoBehaviour:
   price: 0
   level: 0
   slot: 5
+  priceType: 1
 --- !u!114 &1986159039
 MonoBehaviour:
   m_ObjectHideFlags: 0

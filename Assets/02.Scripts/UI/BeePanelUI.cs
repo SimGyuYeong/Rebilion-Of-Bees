@@ -13,6 +13,7 @@ public class BeePanelUI : MonoBehaviour
     private TextMeshProUGUI _damageText;
     private Image _buttonImage;
     private Image _icon;
+    private Image _honeyTypeIcon;
     public int slot;
     private GameObject _notgetPanel;
 
@@ -29,6 +30,7 @@ public class BeePanelUI : MonoBehaviour
         _damageText = transform.Find("Damage/Value").GetComponent<TextMeshProUGUI>();
         _buttonImage = transform.Find("Button").GetComponent<Image>();
         _icon = transform.Find("Icon").GetComponent<Image>();
+        _honeyTypeIcon = transform.Find("HoneyType").GetComponent<Image>();
         _notgetPanel = transform.Find("NotGetPanel").gameObject;
 
         _shop = transform.parent.parent.parent.GetComponent<Shop>();
@@ -54,6 +56,7 @@ public class BeePanelUI : MonoBehaviour
             _priceText.text = upgrade.GetPrice().ToString();
             _damageText.text = bee.damage.ToString();
             _icon.sprite = bee.icon.sprite;
+            _honeyTypeIcon.sprite = bee.honeyType;
 
             _buttonImage.color = upgrade.IsPurchase() ? Color.white : Color.gray;
             _bee = bee;
