@@ -25,8 +25,9 @@ public class Bee : MonoBehaviour
         }
     }
 
-    public void SpawnBee()
+    public void Travle()
     {
-
+        honeyAmount += GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY;
+        Destroy(this);
     }
 }

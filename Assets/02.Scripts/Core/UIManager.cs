@@ -74,6 +74,15 @@ public class UIManager : MonoBehaviour
         seq.Append(_royalText.transform.DOScale(Vector3.one, .2f));
     }
 
+    public void GameExit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
+    }
+
     public void OptionPanelControl()
     {
         if (optionPanel.transform.localScale == Vector3.zero)
