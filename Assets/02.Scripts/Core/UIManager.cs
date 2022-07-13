@@ -66,7 +66,7 @@ public class UIManager : MonoBehaviour
 
     public void RoyalValueUpdate()
     {
-        _royalText.text = GetUnit(money);
+        _royalText.text = GetUnit(royal);
         Sequence seq = DOTween.Sequence();
         seq.Append(_royalText.transform.DOScale(Vector3.one * 1.2f, .2f));
         seq.Append(_royalText.transform.DOScale(Vector3.one, .2f));

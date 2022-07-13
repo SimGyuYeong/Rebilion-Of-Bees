@@ -46,7 +46,7 @@ public class BeeInfo : MonoBehaviour
             transform.DOScale(Vector3.one, .3f);
             _nameText.text = bee.beeName;
             _beeImage.sprite = bee.icon.sprite;
-            _levelText.text = bee.level.ToString();
+            _levelText.text = string.Format($"Lv. {bee.level}");
             _infoText.text = bee.info;
             _damageText.text = bee.damage.ToString();
             _criticalText.text = bee.critical.ToString();

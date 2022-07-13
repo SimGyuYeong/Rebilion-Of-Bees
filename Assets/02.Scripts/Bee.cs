@@ -14,6 +14,7 @@ public class Bee : MonoBehaviour
     public int honeyAmount; // 출장시 지급될 꿀량
     public string rangeType; // 공격 타입 ( 근거리,중거리,원거리 )
     public string info; // 설명
+    public bool isGet; // 해당 벌을 얻었는가?
     public Image icon; // 아이콘
 
     public static void ApplyDamage(long damage, string beeName)
