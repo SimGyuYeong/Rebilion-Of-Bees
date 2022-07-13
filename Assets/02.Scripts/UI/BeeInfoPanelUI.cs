@@ -5,9 +5,9 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening; 
 
-public class BeeInfo : MonoBehaviour
+public class BeeInfoPanelUI : MonoBehaviour
 {
-    private Image _honeyTypeIcon;
+    private Image _honeyTypeIcon; 
     private TextMeshProUGUI _nameText;
     private Image _beeImage;
     private TextMeshProUGUI _levelText;
@@ -17,13 +17,13 @@ public class BeeInfo : MonoBehaviour
     private TextMeshProUGUI _attackSpeedText;
     private TextMeshProUGUI _rangeTypeText;
     private Image _honeyTypeImage;
-    private TextMeshProUGUI _honeyAmountText;
+    private TextMeshProUGUI _honeyAmountText; 
 
     private void Awake()
     {
         _honeyTypeIcon = transform.Find("NamePanel/Image").GetComponent<Image>();
         _nameText = transform.Find("NamePanel/name").GetComponent<TextMeshProUGUI>();
-        _beeImage = transform.Find("BeeImage").GetComponent<Image>();
+        _beeImage = transform.Find("BeeImage").GetComponent<Image>(); 
         _levelText = transform.Find("LevelText").GetComponent<TextMeshProUGUI>();
         _infoText = transform.Find("InfoText").GetComponent<TextMeshProUGUI>();
 

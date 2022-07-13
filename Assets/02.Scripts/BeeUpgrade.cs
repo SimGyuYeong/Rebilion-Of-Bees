@@ -33,6 +33,6 @@ public class BeeUpgrade : IShopItem
 
     public bool IsPurchase()
     {
-        return GetPrice() <= SaveManager.instance._userSave._hasMoney;
+        return GetPrice() <= 1;
     }
 }
