@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    public static bool IsFirst = false;
+    
     public SaveManager _saveManager { get; private set; }
     public StageManager _stageManager { get; private set; }
 
@@ -34,6 +36,10 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Start()
     {
-
+        if(IsFirst == true)
+        {
+            IsFirst = false;
+            _saveManager._userSave.ResetData();
+        }
     }
 }

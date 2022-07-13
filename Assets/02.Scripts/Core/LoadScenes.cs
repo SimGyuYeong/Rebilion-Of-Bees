@@ -9,8 +9,18 @@ public class LoadScenes : MonoBehaviour
         SceneManager.LoadScene(str);
     }
 
+    public void FirstStart()
+    {
+        GameManager.IsFirst = true;
+        SceneManager.LoadScene("GameScene");
+    }
+
     public void QuitScene()
     {
-        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
     }
 }
