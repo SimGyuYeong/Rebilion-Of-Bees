@@ -6,6 +6,6 @@ public abstract class UpgradeType : MonoBehaviour
 {
     public float addValue;
     public string info;
-
+ 
     public abstract void Upgrade();
 }

@@ -30,7 +30,10 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnDrag(PointerEventData eventData)
     {
-        _rect.position = eventData.position;
+        Vector3 pos = eventData.position;
+        pos.z = 0;
+
+        _rect.position = pos;
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -45,50 +48,134 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         }
         else
         {
-            // 만약 여러 개라면
-            Transform slot = eventData.pointerDrag.transform.parent;
-            if (slot.childCount > 1)
+            if (_previousParent.GetComponent<MapInform>())
             {
-                ItemInform item_1 = slot.GetChild(0).GetComponent<ItemInform>();
-                ItemInform item_2 = slot.GetChild(1).GetComponent<ItemInform>();
+                GameManager.Instance._saveManager._userSave.RemoveTowerInfo(this.GetComponent<TowerInform>());
+            }
 
-                if (item_1._itemType == ItemType.EGG || item_2._itemType == ItemType.EGG)
+            Transform slot = eventData.pointerDrag.transform.parent;
+
+            // 맵인가용?
+            MapInform mapInform = slot.GetComponent<MapInform>();
+
+            if (mapInform != null)
+            {
+                if (mapInform._isWay || !GameManager.Instance._saveManager._userSave.IsCanBuildBee())
                 {
-                    if (item_1._itemType == ItemType.EGG && item_2._itemType == ItemType.EGG)
-                    {
-                        return;
-                    }
-
-                    if (item_1._itemType == ItemType.EGG)
-                    {
-                        item_1._itemType = ItemType.BEE;
-                        item_1._itemGrade = item_2._itemGrade;
-                    }
-                    else
-                    {
-                        item_2._itemType = ItemType.BEE;
-                        item_2._itemGrade = item_1._itemGrade;
-                    }
-
-                    Destroy(item_2.gameObject);
+                    transform.SetParent(_previousParent);
+                    _rect.position = _previousParent.GetComponentInParent<RectTransform>().position;
                     return;
                 }
 
-                // 아이템의 타입이 같은지
-                if (item_1._itemType == item_2._itemType)
+                // 자식이 두 개인가?
+                if (slot.childCount > 1)
                 {
-                    // 아이템이 등급도 같다면
-                    if (item_1._itemGrade == item_2._itemGrade)
+                    ItemInform item_1 = slot.GetChild(0).GetComponent<ItemInform>();
+                    ItemInform item_2 = slot.GetChild(1).GetComponent<ItemInform>();
+
+                    if (item_2._itemType == ItemType.BEE)
                     {
-                        // 아이템 한 개 없애고 하나를 다음 레벨로
-                        item_1._itemGrade++;
-                        Destroy(item_2.gameObject);
+                        // 포탑이 배치됨
+                        GameManager.Instance._saveManager._userSave.AddTowerInfo(item_2.GetComponent<TowerInform>());
+
+                        slot.GetChild(0).GetComponent<RectTransform>().position = _previousParent.GetComponentInParent<RectTransform>().position;
+                        slot.GetChild(0).SetParent(_previousParent);
+                    }
+                    else
+                    {
+                        transform.SetParent(_previousParent);
+                        _rect.position = _previousParent.GetComponentInParent<RectTransform>().position;
                         return;
                     }
                 }
 
-                slot.GetChild(0).GetComponent<RectTransform>().position = _previousParent.GetComponentInParent<RectTransform>().position;
-                slot.GetChild(0).SetParent(_previousParent);
+                else
+                {
+                    // 내가 잡은게 벌이면 
+                    ItemInform item = slot.GetChild(0).GetComponent<ItemInform>();
+
+                    if (item._itemType == ItemType.BEE)
+                    {
+                        // 포탑이 배치됨
+                        GameManager.Instance._saveManager._userSave.AddTowerInfo(item.GetComponent<TowerInform>());
+                    }
+                    else
+                    {
+                        transform.SetParent(_previousParent);
+                        _rect.position = _previousParent.GetComponentInParent<RectTransform>().position;
+                    }
+
+                }
+            }
+            else
+            {
+                if (slot.childCount > 1)
+                {
+                    ItemInform item_1 = slot.GetChild(0).GetComponent<ItemInform>();
+                    ItemInform item_2 = slot.GetChild(1).GetComponent<ItemInform>();
+
+                    // 옮기는 게 맵이라면
+                    if (_previousParent.GetComponent<MapInform>() != null)
+                    {
+                        if (item_1._itemType == ItemType.BEE)
+                        {
+                            // 포탑 변경
+                            GameManager.Instance._saveManager._userSave.RemoveTowerInfo(item_1.GetComponent<TowerInform>());
+                            GameManager.Instance._saveManager._userSave.AddTowerInfo(item_2.GetComponent<TowerInform>());
+
+                            slot.GetChild(0).GetComponent<RectTransform>().position = _previousParent.GetComponentInParent<RectTransform>().position;
+                            slot.GetChild(0).SetParent(_previousParent);
+                        }
+                        else
+                        {
+                            transform.SetParent(_previousParent);
+                            _rect.position = _previousParent.GetComponentInParent<RectTransform>().position;
+
+                            return;
+                        }
+                    }
+
+                    if (item_1._itemType == ItemType.EGG || item_2._itemType == ItemType.EGG)
+                    {
+                        if (item_1._itemType == ItemType.BEE || item_2._itemType == ItemType.BEE) return;
+
+                        if (item_1._itemType == ItemType.EGG && item_2._itemType == ItemType.EGG) return;
+
+                        if (item_1._itemType == ItemType.EGG)
+                        {
+                            item_1._itemType = ItemType.BEE;
+                            item_1._itemGrade = item_2._itemGrade;
+                            Destroy(item_2.gameObject);
+                        }
+                        else
+                        {
+                            item_2._itemType = ItemType.BEE;
+                            item_2._itemGrade = item_1._itemGrade;
+                            Destroy(item_1.gameObject);
+                        }
+
+                        return;
+                    }
+
+                    if (item_1._itemType != ItemType.BEE || item_2._itemType != ItemType.BEE)
+                    {
+                        // 아이템의 타입이 같은지
+                        if (item_1._itemType == item_2._itemType)
+                        {
+                            // 아이템이 등급도 같다면
+                            if (item_1._itemGrade == item_2._itemGrade)
+                            {
+                                // 아이템 한 개 없애고 하나를 다음 레벨로
+                                item_1._itemGrade++;
+                                Destroy(item_2.gameObject);
+                                return;
+                            }
+                        }
+                    }
+
+                    slot.GetChild(0).GetComponent<RectTransform>().position = _previousParent.GetComponentInParent<RectTransform>().position;
+                    slot.GetChild(0).SetParent(_previousParent);
+                }
             }
         }
     }

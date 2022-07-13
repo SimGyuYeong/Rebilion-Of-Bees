@@ -28,7 +28,6 @@ public class Shop : MonoBehaviour
     {
         if (_itemList[slot].IsPurchase())
         {
-            SaveManager.instance._userSave._hasMoney -= _itemList[slot].GetPrice();
             _itemList[slot].Upgrade();
         }
     }
