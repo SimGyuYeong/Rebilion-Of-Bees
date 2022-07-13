@@ -7,7 +7,7 @@ using System.Numerics;
 using System;
 using Vector3 = UnityEngine.Vector3;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoSingleton<UIManager>
 {
     public GameObject optionPanel = null;
 
@@ -16,6 +16,9 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI _stageText;
     private TextMeshProUGUI _goldText;
     private TextMeshProUGUI _royalText;
+
+    public TextMeshProUGUI beeSpawnDelayText;
+    public TextMeshProUGUI honeySpawnDelayText;
 
     private int stage, money, royal;
 
@@ -33,6 +36,8 @@ public class UIManager : MonoBehaviour
         royal = 1;
 
         TopPanelUpdate();
+        BeeSpawnDelayCntUpdate();
+        HoneySpawnDelayCntUpdate();
     }
 
     void Update()
@@ -72,6 +77,16 @@ public class UIManager : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         seq.Append(_royalText.transform.DOScale(Vector3.one * 1.2f, .2f));
         seq.Append(_royalText.transform.DOScale(Vector3.one, .2f));
+    }
+
+    public void BeeSpawnDelayCntUpdate()
+    {
+        beeSpawnDelayText.text = String.Format($"{GameManager.Instance._saveManager._userSave.USER_CURRENTEGG} / {GameManager.Instance._saveManager._userSave.USER_MAXEGG}");
+    }
+
+    public void HoneySpawnDelayCntUpdate()
+    {
+        honeySpawnDelayText.text = String.Format($"{GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY} / {GameManager.Instance._saveManager._userSave.USER_MAXHONEY}");
     }
 
     public void GameExit()
@@ -131,5 +146,10 @@ public class UIManager : MonoBehaviour
         string retStr = "";
         for (int i = 0; i < repeatCount; i++) retStr += (char)(65 + index % 26);
         return retStr;
+    }
+
+    public void ButtonTest()
+    {
+        Debug.Log("Button Clicked!");
     }
 }
