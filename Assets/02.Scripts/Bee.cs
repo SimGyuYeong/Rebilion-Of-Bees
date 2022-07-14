@@ -25,21 +25,11 @@ public class Bee : PoolableMono
         Long = 300
     }
 
-    private TravelPrice travel;
     private CircleCollider2D _circleCollider;
 
     private void Awake()
     {
-        travel = FindObjectOfType<TravelPrice>();
         _circleCollider = GetComponent<CircleCollider2D>();
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.V))
-        {
-            Debug.Log(beeName);
-        }
     }
 
     public Bee GetBee()
@@ -101,10 +91,9 @@ public class Bee : PoolableMono
 
     public void Travle()
     {
-        float price = GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY;
-        price += price * travel.travelAddPercent;
+        float price = data._beeInfo._honeyAmount;
+        price += price * GameManager.Instance.travelAddPercent;
         GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY += Mathf.RoundToInt(price);
-        Destroy(this);
     }
 
     public override void Reset()

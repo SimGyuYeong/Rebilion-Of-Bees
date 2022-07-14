@@ -19,6 +19,10 @@ public class TravelDrag : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
     {
         Bee bee = eventData.pointerDrag.GetComponent<Bee>();
         bee.Travle();
+
+        GameManager.Instance._saveManager._userSave.RemoveItemInfo(eventData.pointerDrag.GetComponent<ItemInform>());
+        GameManager.Instance._saveManager._userSave.RefreshItemInfo(eventData.pointerDrag.GetComponent<ItemInform>());
+        GameManager.Instance._saveManager._userSave.DeleteItem(eventData.pointerDrag.gameObject);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
