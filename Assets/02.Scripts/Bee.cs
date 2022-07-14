@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Bee : MonoBehaviour
+public class Bee : PoolableMono
 {
     public string beeName; // 벌 이름
     public Sprite honeyType; // 꿀 속성
@@ -18,6 +18,9 @@ public class Bee : MonoBehaviour
     public bool isGet; // 해당 벌을 얻었는가?
     public Image icon; // 아이콘
     public Sprite bulletSprite; // 총알 이미지
+
+    private bool _isAttack = false;
+    private Bullet _bullet;
      
     public enum RangeType
     { 
@@ -47,23 +50,32 @@ public class Bee : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log(collision.collider.tag);
-        if(collision.collider.tag == "Monster")
+        if(collision.collider.tag == "Monster" && _isAttack == false)
         {
             Attack(collision.transform);
+            StartCoroutine(AttackDelayCoroutine());
         }
     }
 
     public void Attack(Transform monsterTrm)
     {
-        GameObject bullet = new GameObject();
-        bullet.AddComponent<Image>().sprite = bulletSprite;
+        _isAttack = true;
 
-        Sequence seq = DOTween.Sequence();
-        seq.Append(bullet.transform.DOMove(monsterTrm.position, 1f));
-        seq.AppendCallback(() =>
-        {
-            bullet.GetComponent<Monster>().Damaged(damage);
-        });
+        Bullet bullet = PoolManager.Instance.Pop("Bullet") as Bullet;
+        bullet.Init(bulletSprite, monsterTrm, transform.position);
+        bullet.Shoot(Damaged);
+        _bullet = bullet;
+    }
+
+    public void Damaged()
+    {
+        _bullet.GetComponent<Monster>().Damaged(damage);
+    }
+
+    IEnumerator AttackDelayCoroutine()
+    {
+        yield return new WaitForSeconds(3.5f - 3 * attackSpeed);
+        _isAttack = false;
     }
 
     public void Travle()
@@ -72,5 +84,11 @@ public class Bee : MonoBehaviour
         price += price * travel.travelAddPercent;
         honeyAmount += Mathf.RoundToInt(price);
         Destroy(this);
+    }
+
+    public override void Reset()
+    {
+        _isAttack = false;
+
     }
 }

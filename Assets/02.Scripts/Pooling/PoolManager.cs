@@ -14,6 +14,14 @@ public class PoolManager : MonoSingleton<PoolManager>
         _trmParent = transform;
     }
 
+    private void Start()
+    {
+        foreach (PoolingPair pair in _initList.list)
+        {
+            CreatePool(pair.prefab, pair.poolCnt);
+        }
+    }
+
     public void CreatePool(PoolableMono prefab, int count = 10)
     {
         Pool<PoolableMono> pool = new Pool<PoolableMono>(prefab, _trmParent);

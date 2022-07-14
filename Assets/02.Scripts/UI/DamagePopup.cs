@@ -6,11 +6,11 @@ using DG.Tweening;
 
 public class DamagePopup : PoolableMono
 {
-    private TextMeshProUGUI _textMesh;
+    private TextMeshPro _textMesh;
 
     private void Awake()
     {
-        _textMesh = GetComponent<TextMeshProUGUI>();
+        _textMesh = GetComponent<TextMeshPro>();
 
     }
 
@@ -22,7 +22,6 @@ public class DamagePopup : PoolableMono
         if (isCritical)
         {
             _textMesh.color = Color.red;
-            _textMesh.fontSize = 12f;
         }
         else
         {
@@ -30,8 +29,7 @@ public class DamagePopup : PoolableMono
         }
 
         Sequence seq = DOTween.Sequence();
-        seq.Append(transform.DOJump(new Vector3(pos.x + Random.Range(-1f, 1f), pos.y, pos.x), 0.8f, 1, 1f));
-        //seq.Append(transform.DOMoveY(transform.position.y + 0.7f, 1f));
+        seq.Append(transform.DOJump(new Vector3(pos.x + Random.Range(-0.3f, 0.3f), pos.y, pos.x), 0.3f, 1, 0.5f));
         seq.Join(_textMesh.DOFade(0, 1f));
         seq.AppendCallback(() =>
         {
@@ -42,6 +40,5 @@ public class DamagePopup : PoolableMono
     public override void Reset()
     {
         _textMesh.color = Color.white;
-        _textMesh.fontSize = 7f;
     }
 }

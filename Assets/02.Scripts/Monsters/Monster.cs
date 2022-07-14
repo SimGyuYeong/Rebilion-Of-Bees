@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
-public class Monster : MonoBehaviour
+public class Monster : PoolableMono
 {
     public string monsterName;
     public int health;
@@ -10,8 +11,12 @@ public class Monster : MonoBehaviour
     public int damage;
     public int gold;
 
-    private MonsterMove move;
-    private Animator animator;
+    private int _defaultHp;
+    private float _defaultSpd;
+
+    private MonsterMove _move;
+    private Animator _animator;
+    private CircleCollider2D _collider2D;
 
     public Monster(string monsterName, int health, float moveSpd, int damage, int gold)
     {
@@ -20,22 +25,34 @@ public class Monster : MonoBehaviour
         this.moveSpd = moveSpd;
         this.damage = damage;
         this.gold = gold;
-        move._speed = moveSpd;
+        _move._speed = moveSpd;
+
+        _defaultHp = health;
+        _defaultSpd = moveSpd;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            Damaged(1);
+        }
     }
 
     private void Awake()
     {
-        move = GetComponent<MonsterMove>();
-        animator = GetComponent<Animator>();
+        _move = GetComponent<MonsterMove>();
+        _animator = GetComponent<Animator>();
     }
 
     public void Damaged(int damage)
     {
-        animator.SetTrigger("Hit");
+        _animator.SetTrigger("Hit");
 
         health -= damage;
-        DamagePopup popup = PoolManager.Instance.Pop("DamagePopup") as DamagePopup; 
+        DamagePopup popup = PoolManager.Instance.Pop("DamagePopup") as DamagePopup;
         popup?.Setup(damage, transform.position + new Vector3(0, 0.5f, 0), false, Color.black);
+
         if (health <= 0)
         {
             Dead();       
@@ -47,8 +64,28 @@ public class Monster : MonoBehaviour
     /// </summary>
     public void Dead()
     {
-        animator.SetTrigger("Die");
+        moveSpd = 0;
+        _collider2D.enabled = false;
         GameManager.Instance._saveManager._userSave.USER_HASMONEY += gold;
+        StartCoroutine(DieCoroutine());
+    }
+
+    IEnumerator DieCoroutine()
+    {
+        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+        renderer.DOFade(0, .5f);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
+    }
+
+
+    public override void Reset()
+    {
+        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+        renderer.DOFade(1, 0);
+        _collider2D.enabled = true;
+
+        health = _defaultHp;
+        moveSpd = _defaultSpd;
     }
 }

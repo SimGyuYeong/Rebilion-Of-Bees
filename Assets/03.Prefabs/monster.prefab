@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: 
-  health: 0
+  health: 10
   moveSpd: 0
   damage: 0
   gold: 0
