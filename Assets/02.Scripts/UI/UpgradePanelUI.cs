@@ -21,7 +21,7 @@ public class UpgradePanelUI : MonoBehaviour
 
     public void Refresh(ETCUpgrade upgrade)
     {
-        _priceText.text = upgrade.GetPrice().ToString();
+        _priceText.text = UIManager.Instance.GetUnit(upgrade.GetPrice());
 
         string[] info = upgrade.upgradeType.info.Split("{}");
         _infoText.text = string.Format($"{info[0]} {upgrade.level * upgrade.upgradeType.addValue}{info[1]}");
