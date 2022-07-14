@@ -22,6 +22,10 @@ public class GameManager : MonoSingleton<GameManager>
 
     public List<Bee> beeList;
 
+    public List<ItemSave> itemSaveList;
+
+    public float travelAddPercent;
+
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);

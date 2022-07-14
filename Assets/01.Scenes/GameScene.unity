@@ -3883,6 +3883,17 @@ MonoBehaviour:
   - {fileID: 5034841360927457978, guid: 765124386c2a29c45aba2da696e23625, type: 3}
   - {fileID: 5034841360927457978, guid: d85cabb63f8a73e46939dedafd44d758, type: 3}
   - {fileID: 5034841360927457978, guid: 2fb293db8c941624782bb8b67acf865b, type: 3}
+  itemSaveList:
+  - {fileID: 11400000, guid: 83a68e2598125cc45afc1db342cee844, type: 2}
+  - {fileID: 11400000, guid: 0bdb71f9ea5694f449a726a427708494, type: 2}
+  - {fileID: 11400000, guid: 9f4e26b3620edb049a5ff54d9f70befe, type: 2}
+  - {fileID: 11400000, guid: 44b3a3e9589f1f54d8e3d3a2034d214e, type: 2}
+  - {fileID: 11400000, guid: dc55cc4b0506eb94481ce30a8ccf1a87, type: 2}
+  - {fileID: 11400000, guid: f4990cb1e3d8cad49bd3a8ea0bb75d23, type: 2}
+  - {fileID: 11400000, guid: 1afb99a7d8612244a9b48e09bc721272, type: 2}
+  - {fileID: 11400000, guid: 77facfe2ddc724844be8166f3530025d, type: 2}
+  - {fileID: 11400000, guid: 3fe443c14ce572e42b459570e15e58ee, type: 2}
+  - {fileID: 11400000, guid: 033792021e4fece4aab49df3500ae383, type: 2}
 --- !u!4 &214215648
 Transform:
   m_ObjectHideFlags: 0

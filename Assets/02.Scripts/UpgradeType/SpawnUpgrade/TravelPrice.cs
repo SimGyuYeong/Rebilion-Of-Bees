@@ -9,6 +9,7 @@ public class TravelPrice : UpgradeType
     private void Awake()
     {
         travelAddPercent = GameManager.Instance._saveManager._userSave.USER_SHOPITEMLVLIST[9] * addValue;
+        GameManager.Instance.travelAddPercent = travelAddPercent;
     }
 
     public override void Upgrade()
