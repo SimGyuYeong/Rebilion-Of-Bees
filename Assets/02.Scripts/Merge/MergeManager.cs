@@ -18,7 +18,7 @@ public class MergeManager : MonoBehaviour
     public void CreateBee()
     {
         // 알이 있는지?
-        // if (GameManager.Instance._saveManager._userSave.USER_CURRENTEGG <= 0) return;
+        if (GameManager.Instance._saveManager._userSave.USER_CURRENTEGG <= 0) return;
 
         int index = -1;
         for (int i = 0; i < GameManager.Instance._slotList.Count; i++)
@@ -51,7 +51,7 @@ public class MergeManager : MonoBehaviour
     {
         // 확률 넣어야 돼
 
-        //  if (GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY <= 0) return;
+        if (GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY <= 0) return;
 
         int index = -1;
         for (int i = 0; i < GameManager.Instance._slotList.Count; i++)
