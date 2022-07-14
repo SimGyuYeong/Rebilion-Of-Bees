@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RinoAnimator
+  m_Controller: {fileID: 9100000, guid: a62c3dae01376184f987024e10971f4c, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 381037784e3addb4bb7dd05f6ecdc732, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ce98aa83d8d277d4a9041545fda6cae7, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a18c093af109dc741b6c74d1cbd1a32d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c2f86fda51bf9764c8f3353ede251f9a, type: 2}
