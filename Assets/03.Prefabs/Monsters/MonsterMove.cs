@@ -15,9 +15,13 @@ public class MonsterMove : MonoBehaviour
 
     Vector2 _distance = Vector2.zero;
 
+    private Monster _monster;
 
+   
     public void Start()
     {
+        _monster = GetComponent<Monster>();
+
         _index = 0;
         _mapList = GameManager.Instance._mapList;
         _mainCam = Camera.main;
@@ -38,6 +42,7 @@ public class MonsterMove : MonoBehaviour
             if (++_index >= _stageInform._stageNumbers.Count)
             {
                 // 종료 조건
+                HouseManager.Instance.Damage(_monster.damage);
                 Destroy(this.gameObject);
             }
             else

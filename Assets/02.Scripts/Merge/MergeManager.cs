@@ -13,12 +13,23 @@ public class MergeManager : MonoBehaviour
     {
         _beeBtn.GetComponent<Button>().onClick.AddListener(() => CreateBee());
         _honeyBtn.GetComponent<Button>().onClick.AddListener(() => CreateHoney());
+        StartCoroutine(AddBeeCnt());
+    }
+
+    IEnumerator AddBeeCnt()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(2f);
+            GameManager.Instance._saveManager._userSave.USER_CURRENTEGG += 1;
+            GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY += 1;
+        }
     }
 
     public void CreateBee()
     {
         // 알이 있는지?
-        // if (GameManager.Instance._saveManager._userSave.USER_CURRENTEGG <= 0) return;
+        if (GameManager.Instance._saveManager._userSave.USER_CURRENTEGG <= 0) return;
 
         int index = -1;
         for (int i = 0; i < GameManager.Instance._slotList.Count; i++)
@@ -45,13 +56,14 @@ public class MergeManager : MonoBehaviour
         };
 
         GameManager.Instance._saveManager._userSave.AddItemInfo(itemInform);
+        GameManager.Instance._saveManager._userSave.USER_CURRENTEGG -= 1;
     }
 
     public void CreateHoney()
     {
         // 확률 넣어야 돼
 
-        //  if (GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY <= 0) return;
+        if (GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY <= 0) return;
 
         int index = -1;
         for (int i = 0; i < GameManager.Instance._slotList.Count; i++)
@@ -80,5 +92,6 @@ public class MergeManager : MonoBehaviour
         };
 
         GameManager.Instance._saveManager._userSave.AddItemInfo(itemInform);
+        GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY -= 1;
     }
 }

@@ -17,9 +17,9 @@ public class Bee : PoolableMono
 
     private bool _isAttack = false;
     private Transform _targetTrm;
-     
+
     public enum RangeType
-    { 
+    {
         Short = 3,
         Middle = 6,
         Long = 10
@@ -36,7 +36,7 @@ public class Bee : PoolableMono
     {
         return this;
     }
-    
+
     public void DataReset(Bee bee)
     {
         beeName = bee.name;
@@ -52,15 +52,15 @@ public class Bee : PoolableMono
 
     public static void ApplyDamage(int damage, string beeName)
     {
-        foreach(var bee in FindObjectsOfType<Bee>())
+        foreach (var bee in FindObjectsOfType<Bee>())
         {
-            if(bee.beeName == beeName) bee.data._beeInfo._damage += damage;
+            if (bee.beeName == beeName) bee.data._beeInfo._damage += damage;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.collider.tag == "Monster" && _isAttack == false)
+        if (collision.CompareTag("Monster") && _isAttack == false)
         {
             Attack(collision.transform);
             StartCoroutine(AttackDelayCoroutine());
@@ -83,7 +83,7 @@ public class Bee : PoolableMono
         _damage += _damage * (GameManager.Instance._saveManager._userSave.USER_SHOPITEMLVLIST[0] * 2f);
         int random = Random.Range(0, 100);
         bool cri = false;
-        if(random < data._beeInfo._critical)
+        if (random < data._beeInfo._critical)
         {
             cri = true;
             _damage *= 2;

@@ -63,7 +63,6 @@ public class Monster : PoolableMono
         _move._speed = 0;
         _collider2D.enabled = false;
         GameManager.Instance._saveManager._userSave.USER_HASMONEY += gold;
-        Debug.Log(gold);
         StartCoroutine(DieCoroutine());
     }
 
