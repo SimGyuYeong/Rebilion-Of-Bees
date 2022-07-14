@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -1548690702915936560}
   - component: {fileID: -8302297505521912339}
   m_Layer: 0
-  m_Name: monster
+  m_Name: AngryPig
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 993420211, guid: b917a61430a23fc448c87d6f5f55c7a3, type: 3}
+  m_Sprite: {fileID: 1812315636, guid: 8216b039f940a0547b16707575d123df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -119,11 +119,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3494aaf420a2544b93d28dde3f70381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterName: 
-  health: 3
+  monsterName: "\uD654\uB09C\uB3FC\uC9C0"
+  health: 280
   moveSpd: 1
-  damage: 0
-  gold: 100
+  damage: 40
+  gold: 310
 --- !u!58 &-8542576450663308104
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -171,7 +171,7 @@ Animator:
   m_GameObject: {fileID: 474088494520996202}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a62c3dae01376184f987024e10971f4c, type: 2}
+  m_Controller: {fileID: 22100000, guid: 48c56fda07575e9489edcc803e4a592f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
