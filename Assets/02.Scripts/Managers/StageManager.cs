@@ -26,6 +26,8 @@ public class StageManager : MonoBehaviour
         }
 
         StageInform stage = _stageInform[stageNumber];
+        
+        UIManager.Instance.StageUpdate();
 
         // 스테이지 설정 
         for (int i = 0; i < _stageInform[stageNumber]._stageNumbers.Count; i++)

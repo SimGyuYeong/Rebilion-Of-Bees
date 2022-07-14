@@ -54,7 +54,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void StageUpdate()
     {
-        string stagetext = GameManager.Instance._saveManager._userSave.USER_STAGE.ToString();
+        string stagetext = (GameManager.Instance._saveManager._userSave.USER_STAGE + 1).ToString();
         if (GameManager.Instance._saveManager._userSave.USER_STAGE < 10) stagetext = "00" + stagetext;
         else if (GameManager.Instance._saveManager._userSave.USER_STAGE < 100) stagetext = "0" + stagetext;
         _stageText.text = "Stage " + stagetext;

@@ -13409,7 +13409,13 @@ MonoBehaviour:
     - _monster: {fileID: 474088494520996202, guid: bf4aace94f90ca24c9d4f0ee899f2dff, type: 3}
       _spawnDelay: 1.5
     - _monster: {fileID: 474088494520996202, guid: d6e345927c38eee4fa962e50af5bc691, type: 3}
-      _spawnDelay: 4
+      _spawnDelay: 2
+    - _monster: {fileID: 474088494520996202, guid: d6e345927c38eee4fa962e50af5bc691, type: 3}
+      _spawnDelay: 2.5
+    - _monster: {fileID: 474088494520996202, guid: d6e345927c38eee4fa962e50af5bc691, type: 3}
+      _spawnDelay: 3
+    - _monster: {fileID: 474088494520996202, guid: d6e345927c38eee4fa962e50af5bc691, type: 3}
+      _spawnDelay: 3.5
   - _spawns:
     - _monster: {fileID: 474088494520996202, guid: bf4aace94f90ca24c9d4f0ee899f2dff, type: 3}
       _spawnDelay: 1

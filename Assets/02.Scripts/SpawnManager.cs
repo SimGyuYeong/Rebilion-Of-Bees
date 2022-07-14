@@ -18,14 +18,13 @@ public class SpawnManager : MonoBehaviour
     }
     void MonsterStart()
     {
-        _stageNumber = 0;
-        GameManager.Instance._stageManager.SetStage(_stageNumber);
-        SpawnInitialSet(_stageNumber);
+        GameManager.Instance._stageManager.SetStage(GameManager.Instance._saveManager._userSave.USER_STAGE);
+        SpawnInitialSet(GameManager.Instance._saveManager._userSave.USER_STAGE);
     }
 
     public void SpawnInitialSet(int stage)
     {
-        int index = GameManager.Instance._stageManager._stageInform[stage]._stageNumbers[0];
+        // int index = GameManager.Instance._stageManager._stageInform[stage]._stageNumbers[0];
 
         _isSpawning = true;
     }
@@ -48,20 +47,31 @@ public class SpawnManager : MonoBehaviour
         }
 
         GameObject obj = Instantiate(spawns[_stageNumber]._spawns[_index]._monster, _spawnPos);
-        obj.GetComponent<MonsterMove>()._stageInform = GameManager.Instance._stageManager._stageInform[_stageNumber];
+        obj.GetComponent<MonsterMove>()._stageInform = GameManager.Instance._stageManager._stageInform[0];
         _index += 1;
 
         if (_index == spawns[_stageNumber]._spawns.Count)
         {
-            _isSpawning = false;
-
             _index = 0;
 
             _stageNumber += 1;
 
-            if (GameManager.Instance._stageManager._stageInform.Count == _stageNumber) return;
-            GameManager.Instance._stageManager.SetStage(_stageNumber);
+            _isSpawning = false;
+
+            GameManager.Instance._saveManager._userSave.USER_STAGE = _stageNumber;
+            
+            if (spawns.Count == _stageNumber)
+            {
+                return;
+            }
+
+            // GameManager.Instance._stageManager.SetStage(_stageNumber);
+            Invoke("StartStage", 2f);
         }
+    }
+    void StartStage()
+    {
+        SpawnInitialSet(GameManager.Instance._saveManager._userSave.USER_STAGE);
     }
 
 }

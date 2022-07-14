@@ -257,6 +257,7 @@ public class UserSave
         USER_CURRENTEGG = 0;
         USER_MAXEGG = 10;
         USER_MAXBEECOUNT = 5;
+        USER_STAGE = 0;
 
         PlayerPrefs.DeleteKey("TowerInfoJsonStr");
         PlayerPrefs.DeleteKey("ItemInfoJsonStr");
