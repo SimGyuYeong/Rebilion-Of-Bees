@@ -11,6 +11,7 @@ public class Monster : MonoBehaviour
     public int gold;
 
     private MonsterMove move;
+    private Animator animator;
 
     public Monster(string monsterName, int health, float moveSpd, int damage, int gold)
     {
@@ -25,10 +26,13 @@ public class Monster : MonoBehaviour
     private void Awake()
     {
         move = GetComponent<MonsterMove>();
+        animator = GetComponent<Animator>();
     }
 
     public void Damaged(int damage)
     {
+        animator.SetTrigger("Hit");
+
         health -= damage;
         DamagePopup popup = PoolManager.Instance.Pop("DamagePopup") as DamagePopup; 
         popup?.Setup(damage, transform.position + new Vector3(0, 0.5f, 0), false, Color.black);
@@ -43,6 +47,7 @@ public class Monster : MonoBehaviour
     /// </summary>
     public void Dead()
     {
+        animator.SetTrigger("Die");
         GameManager.Instance._saveManager._userSave.USER_HASMONEY += gold;
         Destroy(gameObject);
     }
