@@ -12,7 +12,7 @@ public class Monster : PoolableMono
     public int gold;
 
     private int _defaultHp;
-    private float _defaultSpd;
+    private bool _isDead = false;
 
     private MonsterMove _move;
     private Animator _animator;
@@ -28,7 +28,6 @@ public class Monster : PoolableMono
         _move._speed = moveSpd;
 
         _defaultHp = health;
-        _defaultSpd = moveSpd;
     }
 
     private void Update()
@@ -43,19 +42,24 @@ public class Monster : PoolableMono
     {
         _move = GetComponent<MonsterMove>();
         _animator = GetComponent<Animator>();
+        _collider2D = GetComponent<CircleCollider2D>();
     }
 
     public void Damaged(int damage)
     {
-        _animator.SetTrigger("Hit");
-
-        health -= damage;
-        DamagePopup popup = PoolManager.Instance.Pop("DamagePopup") as DamagePopup;
-        popup?.Setup(damage, transform.position + new Vector3(0, 0.5f, 0), false, Color.black);
-
-        if (health <= 0)
+        if(_isDead == false)
         {
-            Dead();       
+            _animator.SetTrigger("Hit");
+
+            health -= damage;
+            DamagePopup popup = PoolManager.Instance.Pop("DamagePopup") as DamagePopup;
+            popup?.Setup(damage, transform.position + new Vector3(0, 0.5f, 0), false, Color.black);
+
+            if (health <= 0)
+            {
+                _isDead = true;
+                Dead();
+            }
         }
     }
 
@@ -64,9 +68,10 @@ public class Monster : PoolableMono
     /// </summary>
     public void Dead()
     {
-        moveSpd = 0;
+        _move._speed = 0;
         _collider2D.enabled = false;
         GameManager.Instance._saveManager._userSave.USER_HASMONEY += gold;
+        Debug.Log(gold);
         StartCoroutine(DieCoroutine());
     }
 
@@ -86,6 +91,7 @@ public class Monster : PoolableMono
         _collider2D.enabled = true;
 
         health = _defaultHp;
-        moveSpd = _defaultSpd;
+        _move._speed = moveSpd;
+        _isDead = false;
     }
 }

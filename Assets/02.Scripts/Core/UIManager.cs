@@ -20,7 +20,7 @@ public class UIManager : MonoSingleton<UIManager>
     public TextMeshProUGUI beeSpawnDelayText;
     public TextMeshProUGUI honeySpawnDelayText;
 
-    private int stage, money, royal;
+    private int stage, royal;
 
     private void Awake()
     {
@@ -32,12 +32,13 @@ public class UIManager : MonoSingleton<UIManager>
     private void Start()
     {
         stage = 1;
-        money = GameManager.Instance._saveManager._userSave.USER_HASMONEY;
         royal = 1;
 
         TopPanelUpdate();
         BeeSpawnDelayCntUpdate();
         HoneySpawnDelayCntUpdate();
+        GoldValueUpdate();
+        RoyalValueUpdate();
     }
 
     void Update()
@@ -65,7 +66,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void GoldValueUpdate()
     {
-        _goldText.text = GetUnit(money);
+        _goldText.text = GetUnit(GameManager.Instance._saveManager._userSave.USER_HASMONEY);
         Sequence seq = DOTween.Sequence();
         seq.Append(_goldText.transform.DOScale(Vector3.one * 1.2f, .2f));
         seq.Append(_goldText.transform.DOScale(Vector3.one, .2f));
