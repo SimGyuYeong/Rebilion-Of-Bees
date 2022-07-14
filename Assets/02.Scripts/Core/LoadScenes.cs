@@ -8,6 +8,7 @@ public class LoadScenes : MonoBehaviour
 {
     public GameObject loadPanel;
     public GameObject buttonPanel;
+    public GameObject infoPanel;
     public Image progressBar;
 
     public void LoadScene(string str)
@@ -38,12 +39,12 @@ public class LoadScenes : MonoBehaviour
         op.allowSceneActivation = false;
 
         float timer = 0f;
-        while(!op.isDone)
+        while (!op.isDone)
         {
             yield return null;
 
             Debug.Log(op.progress);
-            if(op.progress < 0.9f)
+            if (op.progress < 0.9f)
             {
                 progressBar.fillAmount = op.progress;
             }
@@ -51,12 +52,17 @@ public class LoadScenes : MonoBehaviour
             {
                 timer += Time.unscaledDeltaTime;
                 progressBar.fillAmount = Mathf.Lerp(0.9f, 1f, timer);
-                if(progressBar.fillAmount == 1f)
+                if (progressBar.fillAmount == 1f)
                 {
                     op.allowSceneActivation = true;
                     yield break;
                 }
             }
         }
+    }
+
+    public void PanelOnOff()
+    {
+        infoPanel.SetActive(!infoPanel.activeSelf);
     }
 }
