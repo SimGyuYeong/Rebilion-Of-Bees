@@ -25,6 +25,8 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
         _canvasGroup.alpha = 0.6f;
         _canvasGroup.blocksRaycasts = false;
+
+        TravelDrag.IsDrag = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -37,6 +39,8 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        TravelDrag.IsDrag = false;
+
         _canvasGroup.alpha = 1.0f;
         _canvasGroup.blocksRaycasts = true;
 
