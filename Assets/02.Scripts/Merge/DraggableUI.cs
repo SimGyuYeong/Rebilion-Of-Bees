@@ -216,6 +216,12 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                             itemInform._itemData._itemGrade = itemData_2._itemGrade;
                             itemInform._imageSprite = GameManager.Instance.beeList[itemInform._itemData._itemGrade].icon.sprite;
 
+                            if (GameManager.Instance.itemSaveList[itemInform._itemData._itemGrade]._itemGrade == 0)
+                            {
+                                GameManager.Instance.itemSaveList[itemInform._itemData._itemGrade]._itemGrade = 1;
+                                GameManager.Instance._saveManager._userSave.ChangeBeeInfo(itemInform._itemData._itemGrade, 1);
+                            }
+
                             GameManager.Instance._saveManager._userSave.RemoveItemInfo(item_1.GetComponent<ItemInform>());
                             GameManager.Instance._saveManager._userSave.RefreshItemInfo(item_1.GetComponent<ItemInform>());
                             GameManager.Instance._saveManager._userSave.DeleteItem(item_2.gameObject);
@@ -230,6 +236,12 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                             itemInform._itemData._slotNumber = index_1;
                             itemInform._itemData._itemGrade = itemData_1._itemGrade;
                             itemInform._imageSprite = GameManager.Instance.beeList[itemInform._itemData._itemGrade].icon.sprite;
+
+                            if (GameManager.Instance.itemSaveList[itemInform._itemData._itemGrade]._itemGrade == 0)
+                            {
+                                GameManager.Instance.itemSaveList[itemInform._itemData._itemGrade]._itemGrade = 1;
+                                GameManager.Instance._saveManager._userSave.ChangeBeeInfo(itemInform._itemData._itemGrade, 1);
+                            }
 
                             GameManager.Instance._saveManager._userSave.RemoveItemInfo(item_1.GetComponent<ItemInform>());
                             GameManager.Instance._saveManager._userSave.RefreshItemInfo(item_1.GetComponent<ItemInform>());

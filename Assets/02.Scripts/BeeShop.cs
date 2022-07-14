@@ -6,7 +6,16 @@ public class BeeShop : Shop
 {
     public List<BeeUpgrade> beeList = new List<BeeUpgrade>();
 
-    protected override void Init()
+    private void OnEnable()
+    {
+        BeePanelUI[] panel = transform.GetComponentsInChildren<BeePanelUI>();
+        foreach(var p in panel)
+        {
+            p.Refresh();
+        }
+    }
+
+    public override void Init()
     {
         int _slot = 0;
         foreach (var bee in beeList)

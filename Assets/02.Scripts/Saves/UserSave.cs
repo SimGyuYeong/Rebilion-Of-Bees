@@ -84,8 +84,20 @@ public class UserSave
         }
     }
 
+    public int USER_STAGE
+    {
+        get => _userStage;
+        set
+        {
+            _userStage = value;
+            GameManager.Instance._saveManager.SaveUserStage(_userStage);
+        }
+    }
+
+
     // 유저의 이름
     [SerializeField] private string _userName;
+    [SerializeField] private int _userStage;
 
     [SerializeField] private int _hasMoney;
     [SerializeField] private int _hasRoyalJelly;
@@ -123,7 +135,7 @@ public class UserSave
     {
         GameManager.Instance._towerManager.RefreshTower(inform);
         CreateTower(inform, inform._slotNumber);
-        
+
     }
     public Dictionary<int, GameObject> _towerDictionary = new Dictionary<int, GameObject>();
     public void CreateTower(ItemData inform, int index)
@@ -275,9 +287,10 @@ public class UserSave
 
     public UserSave() { }
 
-    public UserSave(string userName, int hasMoney, int currentHoney, int maxHoney, int currentEgg, int maxEgg, int maxBee, List<ItemData> towerInfos, List<ItemData> itemInfos, List<int> beeInfos, List<int> shopItemInfos)
+    public UserSave(string userName, int userStage,int hasMoney, int currentHoney, int maxHoney, int currentEgg, int maxEgg, int maxBee, List<ItemData> towerInfos, List<ItemData> itemInfos, List<int> beeInfos, List<int> shopItemInfos)
     {
         _userName = userName;
+        _userStage = userStage;
         _hasMoney = hasMoney;
         _currentHoney = currentHoney;
         _maxHoney = maxHoney;
@@ -318,7 +331,7 @@ public class UserSave
         else
         {
             int slot = 0;
-            foreach(var bee in GameManager.Instance.beeList)
+            foreach (var bee in GameManager.Instance.beeList)
             {
                 GameManager.Instance.itemSaveList[slot]._itemGrade = _beeLvList[slot];
                 bee.data = GameManager.Instance.itemSaveList[slot];

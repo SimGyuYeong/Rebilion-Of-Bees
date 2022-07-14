@@ -30,14 +30,6 @@ public class Monster : PoolableMono
         _defaultHp = health;
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.V))
-        {
-            Damaged(1);
-        }
-    }
-
     private void Awake()
     {
         _move = GetComponent<MonsterMove>();
@@ -45,7 +37,7 @@ public class Monster : PoolableMono
         _collider2D = GetComponent<CircleCollider2D>();
     }
 
-    public void Damaged(int damage)
+    public void Damaged(int damage, bool cri)
     {
         if(_isDead == false)
         {
@@ -53,7 +45,7 @@ public class Monster : PoolableMono
 
             health -= damage;
             DamagePopup popup = PoolManager.Instance.Pop("DamagePopup") as DamagePopup;
-            popup?.Setup(damage, transform.position + new Vector3(0, 0.5f, 0), false, Color.black);
+            popup?.Setup(damage, transform.position + new Vector3(0, 0.5f, 0), cri, Color.black);
 
             if (health <= 0)
             {

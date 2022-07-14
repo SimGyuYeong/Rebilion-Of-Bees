@@ -41,6 +41,7 @@ public class SaveManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         string name = PlayerPrefs.GetString("UserName", "");
+        int userStage = PlayerPrefs.GetInt("UserStage", 0);
         int hasMoney = PlayerPrefs.GetInt("HasMoney", 0);
         int hasRoyalJelly = PlayerPrefs.GetInt("RoyalJelly", 0);
         int currentHoney = PlayerPrefs.GetInt("CurrentHoney", 0);
@@ -61,12 +62,16 @@ public class SaveManager : MonoBehaviour
         string shopItemInfoJsonStr = PlayerPrefs.GetString("ShopItemJsonStr", "");
         var shopItemInfos = JsonConvert.DeserializeObject<List<int>>(shopItemInfoJsonStr);
 
-        _userSave = new UserSave(name, hasMoney, currentHoney, maxHoney, currentEgg, maxEgg, maxBeeCount, towerInfos, itemInfos, beeInfos, shopItemInfos);
+        _userSave = new UserSave(name, userStage, hasMoney, currentHoney, maxHoney, currentEgg, maxEgg, maxBeeCount, towerInfos, itemInfos, beeInfos, shopItemInfos);
     }
 
     public void SaveUserName(string value)
     {
         PlayerPrefs.SetString("UserName", value);
+    }
+    public void SaveUserStage(int value)
+    {
+        PlayerPrefs.SetInt("UserStage", value);
     }
     public void SaveHasMoney(int value)
     {

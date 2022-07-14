@@ -17,10 +17,10 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
-        Init();
+        Invoke("Init", 0.1f);
     }
 
-    protected virtual void Init()
+    public virtual void Init()
     {
         //do nothing!
     }

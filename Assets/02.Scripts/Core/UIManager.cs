@@ -23,8 +23,6 @@ public class UIManager : MonoSingleton<UIManager>
     public Sprite[] honeySpriteList;
     public Sprite eggSprite;
 
-    private int stage;
-
     private void Awake()
     {
         _stageText = topPanel.Find("Stage").GetComponent<TextMeshProUGUI>();
@@ -34,13 +32,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     private void Start()
     {
-        stage = 1;
-
-        TopPanelUpdate();
-        BeeSpawnDelayCntUpdate();
-        HoneySpawnDelayCntUpdate();
-        GoldValueUpdate();
-        RoyalValueUpdate();
+        Invoke("TopPanelUpdate", 0.1f);
     }
 
     void Update()
@@ -56,13 +48,15 @@ public class UIManager : MonoSingleton<UIManager>
         StageUpdate();
         GoldValueUpdate();
         RoyalValueUpdate();
+        BeeSpawnDelayCntUpdate();
+        HoneySpawnDelayCntUpdate();
     }
 
     public void StageUpdate()
     {
-        string stagetext = stage.ToString();
-        if (stage < 10) stagetext = "00" + stagetext;
-        else if (stage < 100) stagetext = "0" + stagetext;
+        string stagetext = GameManager.Instance._saveManager._userSave.USER_STAGE.ToString();
+        if (GameManager.Instance._saveManager._userSave.USER_STAGE < 10) stagetext = "00" + stagetext;
+        else if (GameManager.Instance._saveManager._userSave.USER_STAGE < 100) stagetext = "0" + stagetext;
         _stageText.text = "Stage " + stagetext;
     }
 

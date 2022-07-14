@@ -21,4 +21,4 @@ MonoBehaviour:
     _attackSpeed: 1
     _critical: 10
     _honeyAmount: 2
-    _range: 150
+    _range: 3

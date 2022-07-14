@@ -16,13 +16,13 @@ public class Bee : PoolableMono
     public Sprite bulletSprite; // ÃÑ¾Ë ÀÌ¹ÌÁö
 
     private bool _isAttack = false;
-    private Bullet _bullet;
+    private Transform _targetTrm;
      
     public enum RangeType
     { 
-        Short = 150,
-        Middle = 225,
-        Long = 300
+        Short = 3,
+        Middle = 6,
+        Long = 10
     }
 
     private CircleCollider2D _circleCollider;
@@ -47,7 +47,7 @@ public class Bee : PoolableMono
         bulletSprite = bee.bulletSprite;
         data = bee.data;
 
-        _circleCollider.radius = (int)data._beeInfo._range;
+        _circleCollider.radius = data._beeInfo._range == RangeType.Short ? 0.5f : data._beeInfo._range == RangeType.Middle ? 1f : 1.5f;
     }
 
     public static void ApplyDamage(int damage, string beeName)
@@ -60,7 +60,6 @@ public class Bee : PoolableMono
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.collider.tag);
         if(collision.collider.tag == "Monster" && _isAttack == false)
         {
             Attack(collision.transform);
@@ -75,17 +74,27 @@ public class Bee : PoolableMono
         Bullet bullet = PoolManager.Instance.Pop("Bullet") as Bullet;
         bullet.Init(bulletSprite, monsterTrm, transform.position);
         bullet.Shoot(Damaged);
-        _bullet = bullet;
+        _targetTrm = monsterTrm;
     }
 
     public void Damaged()
     {
-        _bullet.GetComponent<Monster>().Damaged(data._beeInfo._damage);
+        float _damage = data._beeInfo._damage;
+        _damage += _damage * (GameManager.Instance._saveManager._userSave.USER_SHOPITEMLVLIST[0] * 2f);
+        int random = Random.Range(0, 100);
+        bool cri = false;
+        if(random < data._beeInfo._critical)
+        {
+            cri = true;
+            _damage *= 2;
+        }
+        _targetTrm.GetComponent<Monster>().Damaged(Mathf.RoundToInt(_damage), cri);
     }
 
     IEnumerator AttackDelayCoroutine()
     {
-        yield return new WaitForSeconds(3.5f - 3 * data._beeInfo._attackSpeed);
+        float ime = 2.3f - 2 * data._beeInfo._attackSpeed;
+        yield return new WaitForSeconds(ime);
         _isAttack = false;
     }
 

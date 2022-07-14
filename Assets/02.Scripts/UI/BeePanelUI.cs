@@ -19,6 +19,7 @@ public class BeePanelUI : MonoBehaviour
 
     private Shop _shop;
     private Bee _bee;
+    private BeeUpgrade _upgrade;
 
     public UnityEvent<Bee> InfoButtonClickEvent;
 
@@ -46,6 +47,8 @@ public class BeePanelUI : MonoBehaviour
         if(bee.data._itemGrade == 0)
         {
             _notgetPanel.SetActive(true);
+            _bee = bee;
+            _upgrade = upgrade;
         }
         else
         {
@@ -60,6 +63,28 @@ public class BeePanelUI : MonoBehaviour
 
             _buttonImage.color = upgrade.IsPurchase() ? Color.white : Color.gray;
             _bee = bee;
+            _upgrade = upgrade;
+        }
+    }
+
+    public void Refresh()
+    {
+        if (_bee.data._itemGrade == 0)
+        {
+            _notgetPanel.SetActive(true);
+        }
+        else
+        {
+            _notgetPanel.SetActive(false);
+
+            _nameText.text = _bee.beeName;
+            _levelText.text = string.Format($"Lv.{_bee.data._itemGrade}");
+            _priceText.text = _upgrade.GetPrice().ToString();
+            _damageText.text = _bee.data._beeInfo._damage.ToString();
+            _icon.sprite = _bee.icon.sprite;
+            _honeyTypeIcon.sprite = _bee.honeyType;
+
+            _buttonImage.color = _upgrade.IsPurchase() ? Color.white : Color.gray;
         }
     }
 

@@ -57,9 +57,8 @@ MonoBehaviour:
   level: 1
   info: "\uC81C\uC8FC\uB3C4\uC5D0\uC11C \uB9CE\uC774 \uC11C\uC2DD\uD558\uB294 \uBC8C.
     \uC774\uB4E4\uC740 \uAFC0\uBCF4\uB2E4 \uADE4\uC744 \uBA39\uACE0 \uC0B0\uB2E4."
-  isGet: 1
   icon: {fileID: 7579422424874192295}
-  bulletSprite: {fileID: 0}
+  bulletSprite: {fileID: 21300000, guid: ebfac122b98c02843bfad04d771679d7, type: 3}
 --- !u!222 &2214745473692313028
 CanvasRenderer:
   m_ObjectHideFlags: 0

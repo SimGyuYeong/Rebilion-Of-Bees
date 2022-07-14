@@ -25,6 +25,6 @@ public class Bullet : PoolableMono
 
     public override void Reset()
     {
-
+        transform.localRotation = Quaternion.identity;
     }
 }
