@@ -51,18 +51,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c06c26b396e6f84f9d4626c176a6a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 1afb99a7d8612244a9b48e09bc721272, type: 2}
   beeName: "\uC720\uB2C8\uCF58\uBC8C"
   honeyType: {fileID: 21300000, guid: 55cb926ff9ea3d249ac488712e93ff38, type: 3}
   level: 1
-  damage: 350
-  attackSpeed: 0.9
-  critical: 10
-  honeyAmount: 2
-  rangeType: "\uADFC\uAC70\uB9AC"
   info: "\uC2E0\uD654\uC18D\uC5D0\uC11C\uB9CC \uB098\uC624\uB358 \uBC8C\uB85C \uC2E0\uC131\uD560\uAC70
     \uAC19\uC9C0\uB9CC \uADF8 \uB204\uAD6C\uBCF4\uB2E4 \uB098\uD0DC\uD558\uACE0 \uBA4D\uCCAD\uD558\uB2E4."
   isGet: 1
   icon: {fileID: 7579422424874192295}
+  bulletSprite: {fileID: 0}
 --- !u!222 &2214745473692313028
 CanvasRenderer:
   m_ObjectHideFlags: 0

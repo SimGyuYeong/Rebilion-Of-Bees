@@ -177,6 +177,7 @@ public class UserSave
     public void RefreshItemInfo(ItemInform inform)
     {
         _itemDataList.Add(inform._itemData);
+        inform._image.sprite = inform._imageSprite;
         GameManager.Instance._saveManager.SaveItemInfos(_itemDataList);
     }
     public void CreateItem(ItemInform inform)
@@ -309,6 +310,15 @@ public class UserSave
         if (_beeLvList == null)
         {
             _beeLvList = new List<int>();
+        }
+        else
+        {
+            int slot = 0;
+            foreach(var bee in GameManager.Instance.beeList)
+            {
+                bee.data._itemGrade = GameManager.Instance._saveManager._userSave.USER_BEELVLIST[slot];
+                slot++;
+            }
         }
 
         _shopItemLvList = shopItemInfos;

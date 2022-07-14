@@ -20,7 +20,7 @@ public class BeeInfo
     public float _attackSpeed;
     public float _critical;
     public int _honeyAmount;
-    public float _range;
+    public Bee.RangeType _range;
 }
 
 public enum ItemType

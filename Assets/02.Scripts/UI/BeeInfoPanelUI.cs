@@ -50,12 +50,12 @@ public class BeeInfoPanelUI : MonoBehaviour
             _beeImage.sprite = bee.icon.sprite;
             _levelText.text = string.Format($"Lv. {bee.level}");
             _infoText.text = bee.info;
-            _damageText.text = bee.damage.ToString();
-            _criticalText.text = bee.critical.ToString();
-            _attackSpeedText.text = bee.attackSpeed.ToString();
-            _rangeTypeText.text = bee.rangeType.ToString();
+            _damageText.text = bee.data._beeInfo._damage.ToString();
+            _criticalText.text = bee.data._beeInfo._critical.ToString();
+            _attackSpeedText.text = bee.data._beeInfo._attackSpeed.ToString();
+            _rangeTypeText.text = bee.data._beeInfo._range.ToString();
             
-            _honeyAmountText.text = bee.honeyAmount.ToString();
+            _honeyAmountText.text = bee.data._beeInfo._honeyAmount.ToString();
         }
     }
 

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2992a58cd0b8c947b048c420a8ed10b, type: 3}
-  m_Name: Egg
+  m_Name: YellowHoneyBee
   m_EditorClassIdentifier: 
-  _itemName: "\uC54C"
-  _itemType: 1
+  _itemName: "\uB178\uB780\uAFC0\uBC8C"
+  _itemType: 3
   _itemGrade: 0
-  _itemSprite: {fileID: 21300000, guid: 773bdde65ca51f64a9bb14b01193bc8c, type: 3}
+  _itemSprite: {fileID: 21300000, guid: e6e3270aa05f840499238fb25ce29aff, type: 3}
   _beeInfo:
-    _damage: 0
-    _attackSpeed: 0
-    _critical: 0
-    _honeyAmount: 0
-    _range: 0
+    _damage: 260
+    _attackSpeed: 1.05
+    _critical: 10
+    _honeyAmount: 1
+    _range: 300

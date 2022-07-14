@@ -6,16 +6,12 @@ using UnityEngine.UI;
 
 public class Bee : PoolableMono
 {
+    public ItemSave data;
+
     public string beeName; // 벌 이름
     public Sprite honeyType; // 꿀 속성
     public int level; // 레벨
-    public int damage; // 공격력
-    public float attackSpeed; // 공격속도
-    public float critical; // 크리티컬 확률
-    public int honeyAmount; // 출장시 지급될 꿀량
-    public RangeType rangeType; // 공격 타입 ( 근거리,중거리,원거리 )
     public string info; // 설명
-    public bool isGet; // 해당 벌을 얻었는가?
     public Image icon; // 아이콘
     public Sprite bulletSprite; // 총알 이미지
 
@@ -36,7 +32,6 @@ public class Bee : PoolableMono
     {
         travel = FindObjectOfType<TravelPrice>();
         _circleCollider = GetComponent<CircleCollider2D>();
-        _circleCollider.radius = (int)rangeType;
     }
 
     private void Update()
@@ -57,22 +52,19 @@ public class Bee : PoolableMono
         beeName = bee.name;
         honeyType = bee.honeyType;
         level = bee.level;
-        damage = bee.damage;
-        attackSpeed = bee.attackSpeed;
-        critical = bee.critical;
-        honeyAmount = bee.honeyAmount;
-        rangeType = bee.rangeType;
         info = bee.info;
-        isGet = bee.isGet;
         icon = bee.icon;
         bulletSprite = bee.bulletSprite;
-}
+        data = bee.data;
+
+        _circleCollider.radius = (int)data._beeInfo._range;
+    }
 
     public static void ApplyDamage(int damage, string beeName)
     {
         foreach(var bee in FindObjectsOfType<Bee>())
         {
-            if(bee.beeName == beeName) bee.damage += damage;
+            if(bee.beeName == beeName) bee.data._beeInfo._damage += damage;
         }
     }
 
@@ -98,12 +90,12 @@ public class Bee : PoolableMono
 
     public void Damaged()
     {
-        _bullet.GetComponent<Monster>().Damaged(damage);
+        _bullet.GetComponent<Monster>().Damaged(data._beeInfo._damage);
     }
 
     IEnumerator AttackDelayCoroutine()
     {
-        yield return new WaitForSeconds(3.5f - 3 * attackSpeed);
+        yield return new WaitForSeconds(3.5f - 3 * data._beeInfo._attackSpeed);
         _isAttack = false;
     }
 
@@ -111,13 +103,12 @@ public class Bee : PoolableMono
     {
         float price = GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY;
         price += price * travel.travelAddPercent;
-        honeyAmount += Mathf.RoundToInt(price);
+        GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY += Mathf.RoundToInt(price);
         Destroy(this);
     }
 
     public override void Reset()
     {
         _isAttack = false;
-
     }
 }

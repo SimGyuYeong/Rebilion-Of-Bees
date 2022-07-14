@@ -16,9 +16,6 @@ public class BeeShop : Shop
 
             bee.panel = panel;
             bee.slot = _slot;
-            bee.level = GameManager.Instance._saveManager._userSave.USER_BEELVLIST[_slot];
-            bee.bee.isGet = true;
-            if (bee.level == 0) bee.bee.isGet = false;
             bee.price = bee.GetPrice();
 
             panel.gameObject.SetActive(true);

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2992a58cd0b8c947b048c420a8ed10b, type: 3}
-  m_Name: Egg
+  m_Name: ChairmanBee
   m_EditorClassIdentifier: 
-  _itemName: "\uC54C"
-  _itemType: 1
+  _itemName: "\uD68C\uC7A5\uBC8C"
+  _itemType: 3
   _itemGrade: 0
-  _itemSprite: {fileID: 21300000, guid: 773bdde65ca51f64a9bb14b01193bc8c, type: 3}
+  _itemSprite: {fileID: 21300000, guid: 959946930a5c4a449bb48ca72e104abf, type: 3}
   _beeInfo:
-    _damage: 0
-    _attackSpeed: 0
-    _critical: 0
-    _honeyAmount: 0
-    _range: 0
+    _damage: 320
+    _attackSpeed: 0.8
+    _critical: 10
+    _honeyAmount: 1
+    _range: 225

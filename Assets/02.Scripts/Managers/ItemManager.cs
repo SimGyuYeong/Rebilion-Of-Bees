@@ -17,6 +17,9 @@ public class ItemManager : MonoBehaviour
     {
         GameObject newItem = Instantiate(_item, _slotList[index].transform);
         newItem.GetComponent<ItemInform>()._itemData._slotNumber = index;
+
+        Bee bee = newItem.GetComponent<Bee>();
+        bee.DataReset(GameManager.Instance.beeList[newItem.GetComponent<ItemInform>()._itemData._itemGrade].GetBee());
         return newItem;
     }
     public void RemoveItem(GameObject item)

@@ -43,7 +43,7 @@ public class BeePanelUI : MonoBehaviour
     /// <param name="upgrade"></param>
     public void Refresh(Bee bee, BeeUpgrade upgrade)
     {
-        if(bee.isGet == false)
+        if(bee.data._itemGrade == 0)
         {
             _notgetPanel.SetActive(true);
         }
@@ -52,9 +52,9 @@ public class BeePanelUI : MonoBehaviour
             _notgetPanel.SetActive(false);
 
             _nameText.text = bee.beeName;
-            _levelText.text = string.Format($"Lv.{bee.level}");
+            _levelText.text = string.Format($"Lv.{bee.data._itemGrade}");
             _priceText.text = upgrade.GetPrice().ToString();
-            _damageText.text = bee.damage.ToString();
+            _damageText.text = bee.data._beeInfo._damage.ToString();
             _icon.sprite = bee.icon.sprite;
             _honeyTypeIcon.sprite = bee.honeyType;
 

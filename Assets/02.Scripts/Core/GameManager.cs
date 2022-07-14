@@ -38,7 +38,11 @@ public class GameManager : MonoSingleton<GameManager>
 
             _mapList.Add(obj.GetComponent<MapInform>());
         }
+
+        for (int i = 0; i < _slotList.Count; i++) _slotList[i]._slotNumber = i;
     }
+
+    
 
     private void Start()
     {

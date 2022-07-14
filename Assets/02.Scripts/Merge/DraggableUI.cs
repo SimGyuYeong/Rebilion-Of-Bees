@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -96,7 +96,6 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                     if (map != null)
                     {
                         // 포탑 위치를 바꿔라
-
                         int index_1 = map._mapNumber;
                         int index_2 = _previousParent.GetComponent<MapInform>()._mapNumber;
 
@@ -104,9 +103,10 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                         transform.GetComponent<TowerInform>().towerData._slotNumber = index_1;
 
                         GameManager.Instance._saveManager._userSave.RemoveTowerInfo(item_1.GetComponent<TowerInform>());
+                        GameManager.Instance._saveManager._userSave.RemoveTowerInfo(transform.GetComponent<TowerInform>());
 
                         GameManager.Instance._saveManager._userSave.AddTowerInfo(transform.GetComponent<TowerInform>());
-                        GameManager.Instance._saveManager._userSave.AddTowerInfo(transform.GetComponent<TowerInform>());
+                        GameManager.Instance._saveManager._userSave.AddTowerInfo(item_1.GetComponent<TowerInform>());
 
                         item_1.GetComponent<RectTransform>().position = _previousParent.GetComponentInParent<RectTransform>().position;
                         item_1.SetParent(_previousParent);
@@ -141,6 +141,7 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                     if (map != null)
                     {
                         transform.GetComponent<TowerInform>().towerData._slotNumber = map._mapNumber;
+                        transform.GetComponent<TowerInform>().towerData._itemType = ItemType.BEE;
 
                         GameManager.Instance._saveManager._userSave.AddTowerInfo(transform.GetComponent<TowerInform>());
                         return;
@@ -150,6 +151,7 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                     {
                         // 아이템 리스트에 추가
                         transform.GetComponent<ItemInform>()._itemData._slotNumber = slot._slotNumber;
+                        transform.GetComponent<ItemInform>()._itemData._itemGrade = transform.GetComponent<TowerInform>().towerData._itemGrade;
 
                         GameManager.Instance._saveManager._userSave.RefreshItemInfo(transform.GetComponent<ItemInform>());
                         return;
@@ -174,8 +176,19 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                         if (transform.GetComponent<ItemInform>()._itemData._itemType == ItemType.BEE)
                         {
                             transform.GetComponent<TowerInform>().towerData._slotNumber = map._mapNumber;
+                            transform.GetComponent<TowerInform>().towerData._itemType = ItemType.BEE;
+                            transform.GetComponent<TowerInform>().towerData._itemGrade = transform.GetComponent<ItemInform>()._itemData._itemGrade;
 
+                            item_1.GetComponent<ItemInform>()._itemData._itemGrade = item_1.GetComponent<TowerInform>().towerData._itemGrade;
+                            item_2.GetComponent<ItemInform>()._itemData._itemGrade = item_2.GetComponent<TowerInform>().towerData._itemGrade;
+
+                            GameManager.Instance._saveManager._userSave.RemoveTowerInfo(item_1.GetComponent<TowerInform>());
                             GameManager.Instance._saveManager._userSave.AddTowerInfo(transform.GetComponent<TowerInform>());
+
+                            GameManager.Instance._saveManager._userSave.RefreshItemInfo(item_1.GetComponent<ItemInform>());
+
+                            item_1.GetComponent<RectTransform>().position = _previousParent.GetComponentInParent<RectTransform>().position;
+                            item_1.SetParent(_previousParent);
                             return;
                         }
                         else
@@ -197,8 +210,12 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
                         if (itemData_1._itemType == ItemType.EGG && itemData_2._itemType == ItemType.HONEY)
                         {
-                            item_1.GetComponent<ItemInform>()._itemData._itemType = ItemType.BEE;
-                            item_1.GetComponent<ItemInform>()._itemData._slotNumber = index_1;
+                            var itemInform = item_1.GetComponent<ItemInform>();
+                            itemInform._itemData._itemType = ItemType.BEE;
+                            itemInform._itemData._slotNumber = index_1;
+                            itemInform._itemData._itemGrade = itemData_2._itemGrade;
+                            itemInform._imageSprite = GameManager.Instance.beeList[itemInform._itemData._itemGrade].icon.sprite;
+
                             GameManager.Instance._saveManager._userSave.RemoveItemInfo(item_1.GetComponent<ItemInform>());
                             GameManager.Instance._saveManager._userSave.RefreshItemInfo(item_1.GetComponent<ItemInform>());
                             GameManager.Instance._saveManager._userSave.DeleteItem(item_2.gameObject);
@@ -208,11 +225,16 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                         }
                         else if (itemData_1._itemType == ItemType.HONEY && itemData_2._itemType == ItemType.EGG)
                         {
-                            item_1.GetComponent<ItemInform>()._itemData._itemType = ItemType.BEE;
-                            item_1.GetComponent<ItemInform>()._itemData._slotNumber = index_1;
+                            var itemInform = item_1.GetComponent<ItemInform>();
+                            itemInform._itemData._itemType = ItemType.BEE;
+                            itemInform._itemData._slotNumber = index_1;
+                            itemInform._itemData._itemGrade = itemData_1._itemGrade;
+                            itemInform._imageSprite = GameManager.Instance.beeList[itemInform._itemData._itemGrade].icon.sprite;
+
                             GameManager.Instance._saveManager._userSave.RemoveItemInfo(item_1.GetComponent<ItemInform>());
                             GameManager.Instance._saveManager._userSave.RefreshItemInfo(item_1.GetComponent<ItemInform>());
                             GameManager.Instance._saveManager._userSave.DeleteItem(item_2.gameObject);
+
                             item_1.GetComponent<Image>().sprite = GameManager.Instance.beeList[item_1.GetComponent<ItemInform>()._itemData._itemGrade].icon.sprite;
                             return;
                         }
@@ -242,6 +264,7 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
                                 item_1.GetComponent<RectTransform>().position = _previousParent.GetComponentInParent<RectTransform>().position;
                                 item_1.SetParent(_previousParent);
+                                return;
                             }
                         }
                         else
@@ -270,6 +293,9 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                         {
                             Debug.Log(map._mapNumber);
                             transform.GetComponent<TowerInform>().towerData._slotNumber = map._mapNumber;
+                            transform.GetComponent<TowerInform>().towerData._itemType = ItemType.BEE;
+                            transform.GetComponent<TowerInform>().towerData._itemGrade = transform.GetComponent<ItemInform>()._itemData._itemGrade;
+
                             GameManager.Instance._saveManager._userSave.AddTowerInfo(transform.GetComponent<TowerInform>());
                             return;
                         }
@@ -288,6 +314,20 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                     {
                         // 아이템 리스트에 추가
                         transform.GetComponent<ItemInform>()._itemData._slotNumber = slot._slotNumber;
+
+                        var itemInform = transform.GetComponent<ItemInform>();
+                        if (itemInform._itemData._itemType == ItemType.EGG)
+                        {
+                            itemInform._imageSprite = UIManager.Instance.eggSprite;
+                        }
+                        else if (itemInform._itemData._itemType == ItemType.HONEY)
+                        {
+                            itemInform._imageSprite = UIManager.Instance.honeySpriteList[itemInform._itemData._itemGrade];
+                        }
+                        else if (itemInform._itemData._itemType == ItemType.BEE)
+                        {
+                            itemInform._imageSprite = GameManager.Instance.beeList[itemInform._itemData._itemGrade].icon.sprite;
+                        }
 
                         GameManager.Instance._saveManager._userSave.RefreshItemInfo(transform.GetComponent<ItemInform>());
                         return;
