@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -8542576450663308104}
   - component: {fileID: -1548690702915936560}
   - component: {fileID: -8302297505521912339}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Radish
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -119,10 +119,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3494aaf420a2544b93d28dde3f70381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterName: "\uBB34"
-  health: 110
+  monsterName: 
+  health: 3
   moveSpd: 1
-  damage: 10
+  damage: 0
   gold: 100
 --- !u!58 &-8542576450663308104
 CircleCollider2D:
@@ -139,7 +139,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
 --- !u!50 &-1548690702915936560
 Rigidbody2D:
   serializedVersion: 4
@@ -171,7 +171,7 @@ Animator:
   m_GameObject: {fileID: 474088494520996202}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 8f28d1af69d3b44458ad8747f6edb497, type: 2}
+  m_Controller: {fileID: 9100000, guid: a62c3dae01376184f987024e10971f4c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

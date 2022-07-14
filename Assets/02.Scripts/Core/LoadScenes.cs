@@ -4,12 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoadScenes : MonoBehaviour
+public class LoadScenes : MonoSingleton<LoadScenes>
 {
     public GameObject loadPanel;
     public GameObject buttonPanel;
     public GameObject infoPanel;
     public Image progressBar;
+
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 
     public void LoadScene(string str)
     {

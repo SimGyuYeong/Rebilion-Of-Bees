@@ -22,7 +22,7 @@ public class TowerManager : MonoBehaviour
     {
         GameObject newTower = Instantiate(_item, _mapList[itemData._slotNumber].transform);
         var inform = newTower.GetComponent<ItemInform>();
-        newTower.GetComponent<Image>().sprite = GameManager.Instance.beeList[inform._itemData._itemGrade].icon.sprite;
+        newTower.GetComponent<Image>().sprite = GameManager.Instance.beeList[itemData._itemGrade].icon.sprite;
         inform._itemName = "";
         inform._itemData = itemData;
         var towerInform = newTower.GetComponent<TowerInform>();

@@ -3894,6 +3894,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 77facfe2ddc724844be8166f3530025d, type: 2}
   - {fileID: 11400000, guid: 3fe443c14ce572e42b459570e15e58ee, type: 2}
   - {fileID: 11400000, guid: 033792021e4fece4aab49df3500ae383, type: 2}
+  travelAddPercent: 0
 --- !u!4 &214215648
 Transform:
   m_ObjectHideFlags: 0
@@ -13401,6 +13402,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnPos: {fileID: 1023815364}
   spawns:
+  - _spawns:
+    - _monster: {fileID: 474088494520996202, guid: bf4aace94f90ca24c9d4f0ee899f2dff, type: 3}
+      _spawnDelay: 1
+    - _monster: {fileID: 474088494520996202, guid: 6e55001fe45479e43ac9c26589aab1c1, type: 3}
+      _spawnDelay: 2
   - _spawns:
     - _monster: {fileID: 474088494520996202, guid: bf4aace94f90ca24c9d4f0ee899f2dff, type: 3}
       _spawnDelay: 1
@@ -26881,6 +26887,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _userSave:
     _userName: 
+    _userStage: 0
     _hasMoney: 0
     _hasRoyalJelly: 0
     _currentHoney: 0

@@ -151,6 +151,7 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                     {
                         // 아이템 리스트에 추가
                         transform.GetComponent<ItemInform>()._itemData._slotNumber = slot._slotNumber;
+                        transform.GetComponent<ItemInform>()._imageSprite = transform.GetComponent<Image>().sprite;
                         transform.GetComponent<ItemInform>()._itemData._itemGrade = transform.GetComponent<TowerInform>().towerData._itemGrade;
 
                         GameManager.Instance._saveManager._userSave.RefreshItemInfo(transform.GetComponent<ItemInform>());
