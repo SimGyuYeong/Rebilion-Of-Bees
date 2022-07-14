@@ -13,6 +13,17 @@ public class MergeManager : MonoBehaviour
     {
         _beeBtn.GetComponent<Button>().onClick.AddListener(() => CreateBee());
         _honeyBtn.GetComponent<Button>().onClick.AddListener(() => CreateHoney());
+        StartCoroutine(AddBeeCnt());
+    }
+
+    IEnumerator AddBeeCnt()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(2f);
+            GameManager.Instance._saveManager._userSave.USER_CURRENTEGG += 1;
+            GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY += 1;
+        }
     }
 
     public void CreateBee()
@@ -45,6 +56,7 @@ public class MergeManager : MonoBehaviour
         };
 
         GameManager.Instance._saveManager._userSave.AddItemInfo(itemInform);
+        GameManager.Instance._saveManager._userSave.USER_CURRENTEGG -= 1;
     }
 
     public void CreateHoney()
@@ -80,5 +92,6 @@ public class MergeManager : MonoBehaviour
         };
 
         GameManager.Instance._saveManager._userSave.AddItemInfo(itemInform);
+        GameManager.Instance._saveManager._userSave.USER_CURRENTHONEY -= 1;
     }
 }
