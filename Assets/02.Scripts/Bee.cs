@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,16 +13,27 @@ public class Bee : MonoBehaviour
     public float attackSpeed; // 공격속도
     public float critical; // 크리티컬 확률
     public int honeyAmount; // 출장시 지급될 꿀량
-    public string rangeType; // 공격 타입 ( 근거리,중거리,원거리 )
+    public RangeType rangeType; // 공격 타입 ( 근거리,중거리,원거리 )
     public string info; // 설명
     public bool isGet; // 해당 벌을 얻었는가?
     public Image icon; // 아이콘
+    public Sprite bulletSprite; // 총알 이미지
+     
+    public enum RangeType
+    { 
+        Short = 150,
+        Middle = 225,
+        Long = 300
+    }
 
     private TravelPrice travel;
+    private CircleCollider2D _circleCollider;
 
     private void Awake()
     {
         travel = FindObjectOfType<TravelPrice>();
+        _circleCollider = GetComponent<CircleCollider2D>();
+        _circleCollider.radius = (int)rangeType;
     }
 
     public static void ApplyDamage(int damage, string beeName)
@@ -30,6 +42,28 @@ public class Bee : MonoBehaviour
         {
             if(bee.beeName == beeName) bee.damage += damage;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.collider.tag);
+        if(collision.collider.tag == "Monster")
+        {
+            Attack(collision.transform);
+        }
+    }
+
+    public void Attack(Transform monsterTrm)
+    {
+        GameObject bullet = new GameObject();
+        bullet.AddComponent<Image>().sprite = bulletSprite;
+
+        Sequence seq = DOTween.Sequence();
+        seq.Append(bullet.transform.DOMove(monsterTrm.position, 1f));
+        seq.AppendCallback(() =>
+        {
+            bullet.GetComponent<Monster>().Damaged(damage);
+        });
     }
 
     public void Travle()

@@ -53,7 +53,7 @@ public class BeeInfoPanelUI : MonoBehaviour
             _damageText.text = bee.damage.ToString();
             _criticalText.text = bee.critical.ToString();
             _attackSpeedText.text = bee.attackSpeed.ToString();
-            _rangeTypeText.text = bee.rangeType;
+            _rangeTypeText.text = bee.rangeType.ToString();
             
             _honeyAmountText.text = bee.honeyAmount.ToString();
         }
