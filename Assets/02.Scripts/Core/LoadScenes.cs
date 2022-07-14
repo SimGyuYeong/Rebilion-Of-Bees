@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class LoadScenes : MonoBehaviour
 {
     public GameObject loadPanel;
+    public GameObject buttonPanel;
     public Image progressBar;
 
     public void LoadScene(string str)
@@ -31,6 +32,7 @@ public class LoadScenes : MonoBehaviour
 
     IEnumerator LoadSceneCoroutine(string sceneName)
     {
+        buttonPanel.SetActive(false);
         loadPanel.SetActive(true);
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
         op.allowSceneActivation = false;
