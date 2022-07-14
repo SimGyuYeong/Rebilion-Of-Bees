@@ -39,6 +39,35 @@ public class Bee : PoolableMono
         _circleCollider.radius = (int)rangeType;
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            Debug.Log(beeName);
+        }
+    }
+
+    public Bee GetBee()
+    {
+        return this;
+    }
+    
+    public void DataReset(Bee bee)
+    {
+        beeName = bee.name;
+        honeyType = bee.honeyType;
+        level = bee.level;
+        damage = bee.damage;
+        attackSpeed = bee.attackSpeed;
+        critical = bee.critical;
+        honeyAmount = bee.honeyAmount;
+        rangeType = bee.rangeType;
+        info = bee.info;
+        isGet = bee.isGet;
+        icon = bee.icon;
+        bulletSprite = bee.bulletSprite;
+}
+
     public static void ApplyDamage(int damage, string beeName)
     {
         foreach(var bee in FindObjectsOfType<Bee>())

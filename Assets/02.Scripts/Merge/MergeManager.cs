@@ -76,7 +76,7 @@ public class MergeManager : MonoBehaviour
                 _itemGrade = itemIndex,
                 _slotNumber = index
             },
-            _imageSprite = null
+            _imageSprite = UIManager.Instance.honeySpriteList[0]
         };
 
         GameManager.Instance._saveManager._userSave.AddItemInfo(itemInform);

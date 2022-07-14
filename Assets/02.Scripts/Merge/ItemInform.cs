@@ -10,12 +10,20 @@ public class ItemInform : MonoBehaviour
     public ItemData _itemData;
 
     public Sprite _imageSprite;
+    
+    public Image _image;
+
+    private void Awake()
+    {
+        _image = GetComponent<Image>();
+    }
 
     public void SetItemInform(ItemInform inform)
     {
         _itemName = inform._itemName;
         _itemData = inform._itemData;
         _imageSprite = inform._imageSprite;
+        _image.sprite = _imageSprite;
     }
 }
 

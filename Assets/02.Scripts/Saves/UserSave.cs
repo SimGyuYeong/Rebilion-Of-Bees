@@ -119,13 +119,14 @@ public class UserSave
     {
         GameManager.Instance._towerManager.RefreshTower(inform);
         CreateTower(inform, inform._slotNumber);
+        
     }
     public Dictionary<int, GameObject> _towerDictionary = new Dictionary<int, GameObject>();
     public void CreateTower(ItemData inform, int index)
     {
         inform._slotNumber = index;
         int towerIndex = inform._slotNumber;
-        GameObject obj = GameManager.Instance._towerManager.CreateTower(towerIndex);
+        GameObject obj = GameManager.Instance._towerManager.CreateTower(towerIndex, inform);
         _towerDictionary.Add(towerIndex, obj);
     }
     public void RemoveTower(ItemData inform)
@@ -167,6 +168,8 @@ public class UserSave
         {
             _itemName = "",
             _itemData = inform,
+            _imageSprite = inform._itemType == ItemType.HONEY ? UIManager.Instance.honeySpriteList[inform._itemGrade] :
+            inform._itemType == ItemType.BEE ? GameManager.Instance.beeList[inform._itemGrade].icon.sprite : UIManager.Instance.eggSprite,
         };
 
         CreateItem(item);

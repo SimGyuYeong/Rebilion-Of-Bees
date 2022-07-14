@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class TowerManager : MonoBehaviour
 {
@@ -22,18 +22,21 @@ public class TowerManager : MonoBehaviour
     {
         GameObject newTower = Instantiate(_item, _mapList[itemData._slotNumber].transform);
         var inform = newTower.GetComponent<ItemInform>();
+        newTower.GetComponent<Image>().sprite = GameManager.Instance.beeList[inform._itemData._itemGrade].icon.sprite;
         inform._itemName = "";
         inform._itemData = itemData;
         var towerInform = newTower.GetComponent<TowerInform>();
         towerInform.towerData = itemData;
     }
-    public GameObject CreateTower(int index)
+    public GameObject CreateTower(int index, ItemData itemData)
     {
         GameObject newTower = Instantiate(_tower, _parent);
         Vector3 towerPos = _mainCam.ScreenToWorldPoint(_mapList[index].transform.position);
         towerPos.z = 0;
         newTower.transform.position = towerPos;
         newTower.GetComponent<TowerInform>().towerData._slotNumber = index;
+        Bee bee = newTower.GetComponent<Bee>();
+        bee.DataReset(GameManager.Instance.beeList[itemData._itemGrade].GetBee());
         return newTower;
     }
 

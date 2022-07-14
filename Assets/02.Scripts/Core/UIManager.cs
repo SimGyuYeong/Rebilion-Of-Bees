@@ -20,7 +20,10 @@ public class UIManager : MonoSingleton<UIManager>
     public TextMeshProUGUI beeSpawnDelayText;
     public TextMeshProUGUI honeySpawnDelayText;
 
-    private int stage, royal;
+    public Sprite[] honeySpriteList;
+    public Sprite eggSprite;
+
+    private int stage;
 
     private void Awake()
     {

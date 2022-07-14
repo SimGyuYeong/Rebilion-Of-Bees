@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -201,6 +202,8 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                             GameManager.Instance._saveManager._userSave.RemoveItemInfo(item_1.GetComponent<ItemInform>());
                             GameManager.Instance._saveManager._userSave.RefreshItemInfo(item_1.GetComponent<ItemInform>());
                             GameManager.Instance._saveManager._userSave.DeleteItem(item_2.gameObject);
+
+                            item_1.GetComponent<Image>().sprite = GameManager.Instance.beeList[itemData_2._itemGrade].icon.sprite;
                             return;
                         }
                         else if (itemData_1._itemType == ItemType.HONEY && itemData_2._itemType == ItemType.EGG)
@@ -210,16 +213,36 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                             GameManager.Instance._saveManager._userSave.RemoveItemInfo(item_1.GetComponent<ItemInform>());
                             GameManager.Instance._saveManager._userSave.RefreshItemInfo(item_1.GetComponent<ItemInform>());
                             GameManager.Instance._saveManager._userSave.DeleteItem(item_2.gameObject);
+                            item_1.GetComponent<Image>().sprite = GameManager.Instance.beeList[item_1.GetComponent<ItemInform>()._itemData._itemGrade].icon.sprite;
                             return;
                         }
                         else if (itemData_1._itemType == ItemType.HONEY && itemData_2._itemType == ItemType.HONEY)
                         {
-                            item_1.GetComponent<ItemInform>()._itemData._itemGrade += 1;
-                            item_1.GetComponent<ItemInform>()._itemData._slotNumber = index_1;
-                            GameManager.Instance._saveManager._userSave.RemoveItemInfo(item_1.GetComponent<ItemInform>());
-                            GameManager.Instance._saveManager._userSave.RefreshItemInfo(item_1.GetComponent<ItemInform>());
-                            GameManager.Instance._saveManager._userSave.DeleteItem(item_2.gameObject);
-                            return;
+                            ItemInform inform = item_1.GetComponent<ItemInform>();
+                            if (itemData_1._itemGrade == itemData_2._itemGrade)
+                            {
+                                inform._itemData._itemGrade += 1;
+                                inform._imageSprite = UIManager.Instance.honeySpriteList[inform._itemData._itemGrade];
+                                inform._image.sprite = inform._imageSprite;
+                                inform._itemData._slotNumber = index_1;
+                                GameManager.Instance._saveManager._userSave.RemoveItemInfo(item_1.GetComponent<ItemInform>());
+                                GameManager.Instance._saveManager._userSave.RefreshItemInfo(item_1.GetComponent<ItemInform>());
+                                GameManager.Instance._saveManager._userSave.DeleteItem(item_2.gameObject);
+                                return;
+                            }
+                            else
+                            {
+                                item_1.GetComponent<ItemInform>()._itemData._slotNumber = index_2;
+                                transform.GetComponent<ItemInform>()._itemData._slotNumber = index_1;
+
+                                GameManager.Instance._saveManager._userSave.RemoveItemInfo(item_1.GetComponent<ItemInform>());
+
+                                GameManager.Instance._saveManager._userSave.RefreshItemInfo(item_1.GetComponent<ItemInform>());
+                                GameManager.Instance._saveManager._userSave.RefreshItemInfo(transform.GetComponent<ItemInform>());
+
+                                item_1.GetComponent<RectTransform>().position = _previousParent.GetComponentInParent<RectTransform>().position;
+                                item_1.SetParent(_previousParent);
+                            }
                         }
                         else
                         {

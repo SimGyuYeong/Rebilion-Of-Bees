@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 1050847279211539148}
   - component: {fileID: 2211905470800377908}
   - component: {fileID: 7322472557871661188}
+  - component: {fileID: 2087705969677221374}
+  - component: {fileID: 6078535385396800610}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -117,9 +119,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: 
-  _itemType: 0
-  _itemGrade: 0
-  _itemImage: {fileID: 7541347906836154797}
+  _itemData:
+    _itemType: 0
+    _itemGrade: 0
+    _slotNumber: 0
+  _imageSprite: {fileID: 0}
+  _image: {fileID: 0}
 --- !u!114 &7322472557871661188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,5 +138,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerData:
-    _slotNumber: 0
+    _itemType: 0
     _itemGrade: 0
+    _slotNumber: 0
+--- !u!58 &2087705969677221374
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2208037342346443714}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &6078535385396800610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2208037342346443714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c06c26b396e6f84f9d4626c176a6a44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beeName: 
+  honeyType: {fileID: 0}
+  level: 0
+  damage: 0
+  attackSpeed: 0
+  critical: 0
+  honeyAmount: 0
+  rangeType: 0
+  info: 
+  isGet: 0
+  icon: {fileID: 0}
+  bulletSprite: {fileID: 0}

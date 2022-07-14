@@ -239,7 +239,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 2.46, y: -51.349976}
+  m_AnchoredPosition: {x: 2.46, y: -51.349854}
   m_SizeDelta: {x: 973.95, y: 102.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &19201507
@@ -3872,6 +3872,17 @@ MonoBehaviour:
   - {fileID: 1108380925}
   - {fileID: 1195376550}
   - {fileID: 1303843037}
+  beeList:
+  - {fileID: 5034841360927457978, guid: be43c791889e9cf40986247d42f21d9b, type: 3}
+  - {fileID: 5034841360927457978, guid: 7cad5d6260b301242b6f6560768bd9e4, type: 3}
+  - {fileID: 5034841360927457978, guid: e092c08774f07134086fab25071681f8, type: 3}
+  - {fileID: 5034841360927457978, guid: 4f094b75c7c3d494d97f68d78dbb9787, type: 3}
+  - {fileID: 5034841360927457978, guid: efe44674e91f0274bafb65dd027ce2c3, type: 3}
+  - {fileID: 5034841360927457978, guid: 11612315e97427d4b97cb390b3ed2072, type: 3}
+  - {fileID: 5034841360927457978, guid: 81786d27524243741972359c27c72c6a, type: 3}
+  - {fileID: 5034841360927457978, guid: 765124386c2a29c45aba2da696e23625, type: 3}
+  - {fileID: 5034841360927457978, guid: d85cabb63f8a73e46939dedafd44d758, type: 3}
+  - {fileID: 5034841360927457978, guid: 2fb293db8c941624782bb8b67acf865b, type: 3}
 --- !u!4 &214215648
 Transform:
   m_ObjectHideFlags: 0
@@ -24622,6 +24633,17 @@ MonoBehaviour:
   topPanel: {fileID: 19201506}
   beeSpawnDelayText: {fileID: 1559557063}
   honeySpawnDelayText: {fileID: 520689909}
+  honeySpriteList:
+  - {fileID: 21300000, guid: a5659b36731c7d143ba840fbb299600a, type: 3}
+  - {fileID: 21300000, guid: 6d906084409124d448fd282ce5ba1a27, type: 3}
+  - {fileID: 21300000, guid: 067797b7799b1fa4aab5c85b63d874f8, type: 3}
+  - {fileID: 21300000, guid: 7aa48bfdc3df2794396940388b82bf67, type: 3}
+  - {fileID: 21300000, guid: 2d00de6305410e34dbca1cace06c159e, type: 3}
+  - {fileID: 21300000, guid: faa6e3614ad3e4549a31fece6bb0e659, type: 3}
+  - {fileID: 21300000, guid: 55cb926ff9ea3d249ac488712e93ff38, type: 3}
+  - {fileID: 21300000, guid: b75b87713bb3ac748812c8c380ca3213, type: 3}
+  - {fileID: 21300000, guid: 89926b9c6873428458fd0301b2384688, type: 3}
+  - {fileID: 21300000, guid: 0c5b8ce242e03b44183535739930304a, type: 3}
 --- !u!1001 &1648050897
 PrefabInstance:
   m_ObjectHideFlags: 0

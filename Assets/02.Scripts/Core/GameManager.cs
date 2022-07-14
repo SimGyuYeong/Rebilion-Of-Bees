@@ -20,6 +20,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     public List<SlotInform> _slotList;
 
+    public List<Bee> beeList;
+
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
