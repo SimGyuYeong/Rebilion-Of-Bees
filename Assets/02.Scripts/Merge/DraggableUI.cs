@@ -5,14 +5,13 @@ using UnityEngine.EventSystems;
 
 public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    private Transform _canvas;
+    public Transform _canvas;
     private Transform _previousParent;
     private RectTransform _rect;
     private CanvasGroup _canvasGroup;
 
     private void Awake()
     {
-        _canvas = FindObjectOfType<Canvas>().transform;
         _rect = GetComponent<RectTransform>();
         _canvasGroup = GetComponent<CanvasGroup>();
     }

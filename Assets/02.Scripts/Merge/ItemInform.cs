@@ -11,8 +11,6 @@ public class ItemInform : MonoBehaviour
 
     public Image _itemImage;
 
-
-
     public void SetItemInform(ItemSave itemSave)
     {
         _itemName = itemSave._itemName;

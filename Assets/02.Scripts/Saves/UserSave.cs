@@ -21,6 +21,7 @@ public class UserSave
         {
             _hasMoney = value;
             GameManager.Instance._saveManager.SaveHasMoney(_hasMoney);
+            UIManager.Instance.GoldValueUpdate();
         }
     }
     public int USER_CURRENTHONEY
@@ -30,6 +31,7 @@ public class UserSave
         {
             _currentHoney = value;
             GameManager.Instance._saveManager.SaveCurrentHoney(_currentHoney);
+            UIManager.Instance.HoneySpawnDelayCntUpdate();
         }
     }
     public int USER_MAXHONEY
@@ -39,6 +41,7 @@ public class UserSave
         {
             _maxHoney = value;
             GameManager.Instance._saveManager.SaveMaxHoney(_maxHoney);
+            UIManager.Instance.HoneySpawnDelayCntUpdate();
         }
     }
     public int USER_CURRENTEGG
@@ -48,6 +51,7 @@ public class UserSave
         {
             _currentEgg = value;
             GameManager.Instance._saveManager.SaveCurrentEgg(_currentEgg);
+            UIManager.Instance.BeeSpawnDelayCntUpdate();
         }
     }
     public int USER_MAXEGG
@@ -57,6 +61,7 @@ public class UserSave
         {
             _maxEgg = value;
             GameManager.Instance._saveManager.SaveMaxEgg(_maxEgg);
+            UIManager.Instance.BeeSpawnDelayCntUpdate();
         }
     }
     public int USER_MAXBEECOUNT
