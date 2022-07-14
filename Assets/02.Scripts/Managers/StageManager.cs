@@ -25,12 +25,12 @@ public class StageManager : MonoBehaviour
             map._isWay = false;
         }
 
-        StageInform stage = _stageInform[stageNumber];
+        StageInform stage = _stageInform[0];
         
         UIManager.Instance.StageUpdate();
 
         // 스테이지 설정 
-        for (int i = 0; i < _stageInform[stageNumber]._stageNumbers.Count; i++)
+        for (int i = 0; i < _stageInform[0]._stageNumbers.Count; i++)
         {
             GameManager.Instance._mapList[stage._stageNumbers[i]]._isWay = true;
         }
