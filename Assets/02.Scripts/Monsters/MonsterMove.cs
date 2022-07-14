@@ -15,10 +15,11 @@ public class MonsterMove : MonoBehaviour
 
     Vector2 _distance = Vector2.zero;
 
+   
     public void Start()
     {
+        _index = 0;
         _mapList = GameManager.Instance._mapList;
-
         _mainCam = Camera.main;
         Vector2 pos = _mainCam.ScreenToWorldPoint(_mapList[_stageInform._stageNumbers[_index++]].transform.position);
 

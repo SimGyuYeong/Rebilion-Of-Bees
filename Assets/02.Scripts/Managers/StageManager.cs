@@ -25,10 +25,10 @@ public class StageManager : MonoBehaviour
             map._isWay = false;
         }
 
-        StageInform stage = _stageInform[stageNumber - 1];
+        StageInform stage = _stageInform[stageNumber];
 
         // 스테이지 설정 
-        for (int i = 0; i < _stageInform[stageNumber - 1]._stageNumbers.Count; i++)
+        for (int i = 0; i < _stageInform[stageNumber]._stageNumbers.Count; i++)
         {
             GameManager.Instance._mapList[stage._stageNumbers[i]]._isWay = true;
         }
@@ -39,16 +39,6 @@ public class StageManager : MonoBehaviour
     private void Start()
     {
         _mapList = GameManager.Instance._mapList;
-
-        SetStage(1);
     }
-    public void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            GameObject obj = Instantiate(monster, _monsters);
-            obj.transform.position = Vector3.zero;
-            obj.GetComponent<MonsterMove>()._stageInform = _stageInform[0];
-        }
-    }
+    
 }
