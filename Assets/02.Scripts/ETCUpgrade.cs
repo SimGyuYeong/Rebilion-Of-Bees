@@ -28,7 +28,7 @@ public class ETCUpgrade : MonoBehaviour, IShopItem
 
     private void Start()
     {
-        level = GameManager.Instance._saveManager._userSave.GetShopItemLvList(slot);
+        level = GameManager.Instance._saveManager._userSave.USER_SHOPITEMLVLIST[slot];
         panel.Refresh(this);
     }
 
@@ -43,7 +43,7 @@ public class ETCUpgrade : MonoBehaviour, IShopItem
         if (priceType == PriceType.Money)
             return GetPrice() <= GameManager.Instance._saveManager._userSave.USER_HASMONEY;
         else
-            return GetPrice() <= GameManager.Instance._saveManager._userSave.USER_HASMONEY;
+            return GetPrice() <= GameManager.Instance._saveManager._userSave.USER_HASROYALJELLY;
     }
 
     public void Upgrade()
@@ -53,7 +53,7 @@ public class ETCUpgrade : MonoBehaviour, IShopItem
             if (priceType == PriceType.Money)
                 GameManager.Instance._saveManager._userSave.USER_HASMONEY -= GetPrice();
             else
-                GameManager.Instance._saveManager._userSave.USER_HASMONEY -= GetPrice();
+                GameManager.Instance._saveManager._userSave.USER_HASROYALJELLY -= GetPrice();
 
             level++;
             GameManager.Instance._saveManager._userSave.ChangeShopItemInfo(slot, level);

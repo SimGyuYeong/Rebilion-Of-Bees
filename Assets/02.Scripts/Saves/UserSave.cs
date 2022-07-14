@@ -24,6 +24,16 @@ public class UserSave
             UIManager.Instance.GoldValueUpdate();
         }
     }
+    public int USER_HASROYALJELLY
+    {
+        get => _hasRoyalJelly;
+        set
+        {
+            _hasRoyalJelly = value;
+            GameManager.Instance._saveManager.SaveHasMoney(_hasRoyalJelly);
+            UIManager.Instance.RoyalValueUpdate();
+        }
+    }
     public int USER_CURRENTHONEY
     {
         get => _currentHoney;
@@ -31,7 +41,6 @@ public class UserSave
         {
             _currentHoney = value;
             GameManager.Instance._saveManager.SaveCurrentHoney(_currentHoney);
-            UIManager.Instance.HoneySpawnDelayCntUpdate();
         }
     }
     public int USER_MAXHONEY
@@ -41,7 +50,6 @@ public class UserSave
         {
             _maxHoney = value;
             GameManager.Instance._saveManager.SaveMaxHoney(_maxHoney);
-            UIManager.Instance.HoneySpawnDelayCntUpdate();
         }
     }
     public int USER_CURRENTEGG
@@ -51,7 +59,6 @@ public class UserSave
         {
             _currentEgg = value;
             GameManager.Instance._saveManager.SaveCurrentEgg(_currentEgg);
-            UIManager.Instance.BeeSpawnDelayCntUpdate();
         }
     }
     public int USER_MAXEGG
@@ -61,7 +68,6 @@ public class UserSave
         {
             _maxEgg = value;
             GameManager.Instance._saveManager.SaveMaxEgg(_maxEgg);
-            UIManager.Instance.BeeSpawnDelayCntUpdate();
         }
     }
     public int USER_MAXBEECOUNT
@@ -78,6 +84,7 @@ public class UserSave
     [SerializeField] private string _userName;
 
     [SerializeField] private int _hasMoney;
+    [SerializeField] private int _hasRoyalJelly;
 
     // 꿀 정보
     [SerializeField] private int _currentHoney;
@@ -90,53 +97,99 @@ public class UserSave
     [SerializeField] private int _maxBeeCount;
 
 
-    [SerializeField] private List<TowerData> _towerInformList = new List<TowerData>();
+    [SerializeField] private List<ItemData> _towerDataList = new List<ItemData>();
     public void AddTowerInfo(TowerInform inform)
     {
-        TowerData towerData = inform.towerData;
-        _towerInformList.Add(towerData);
-        Debug.Log(towerData);
-        Debug.Log(inform.transform.parent.GetComponent<MapInform>()._mapNumber);
+        ItemData towerData = inform.towerData;
+        _towerDataList.Add(towerData);
         CreateTower(towerData, inform.transform.parent.GetComponent<MapInform>()._mapNumber);
 
-        GameManager.Instance._saveManager.SaveTowerInfos(_towerInformList);
+        GameManager.Instance._saveManager.SaveTowerInfos(_towerDataList);
     }
-
     public void RemoveTowerInfo(TowerInform inform)
     {
-        TowerData towerData = inform.towerData;
-        _towerInformList.Remove(towerData);
+        ItemData towerData = inform.towerData;
+        _towerDataList.Remove(towerData);
 
-        GameManager.Instance._saveManager.SaveTowerInfos(_towerInformList);
+        GameManager.Instance._saveManager.SaveTowerInfos(_towerDataList);
 
-        // 타워 삭제 
         RemoveTower(towerData);
     }
+    public void RefreshTowerInfo(ItemData inform)
+    {
+        GameManager.Instance._towerManager.RefreshTower(inform);
+        CreateTower(inform, inform._slotNumber);
+    }
     public Dictionary<int, GameObject> _towerDictionary = new Dictionary<int, GameObject>();
-    public void CreateTower(TowerData inform, int index)
+    public void CreateTower(ItemData inform, int index)
     {
         inform._slotNumber = index;
         int towerIndex = inform._slotNumber;
         GameObject obj = GameManager.Instance._towerManager.CreateTower(towerIndex);
         _towerDictionary.Add(towerIndex, obj);
     }
-    public void CreateTower(TowerData inform)
-    {
-        int towerIndex = inform._slotNumber;
-        GameObject obj = GameManager.Instance._towerManager.CreateTower(towerIndex);
-        _towerDictionary.Add(towerIndex, obj);
-    }
-    public void RemoveTower(TowerData inform)
+    public void RemoveTower(ItemData inform)
     {
         int towerIndex = inform._slotNumber;
         GameObject tower = null;
         _towerDictionary.TryGetValue(towerIndex, out tower);
-
         if (tower != null)
         {
             GameManager.Instance._towerManager.RemoveTower(tower);
             _towerDictionary.Remove(towerIndex);
         }
+    }
+
+    [SerializeField] private List<ItemData> _itemDataList = new List<ItemData>();
+    public List<ItemData> USER_ITEMDATALIST
+    {
+        get => _itemDataList;
+    }
+
+    public void AddItemInfo(ItemInform inform)
+    {
+        ItemData itemData = inform._itemData;
+        _itemDataList.Add(itemData);
+
+        CreateItem(inform);
+        GameManager.Instance._saveManager.SaveItemInfos(_itemDataList);
+    }
+    public void RemoveItemInfo(ItemInform inform)
+    {
+        ItemData itemData = inform._itemData;
+        _itemDataList.Remove(itemData);
+
+        GameManager.Instance._saveManager.SaveItemInfos(_itemDataList);
+    }
+    public void RefreshItemInfo(ItemData inform)
+    {
+        ItemInform item = new ItemInform
+        {
+            _itemName = "",
+            _itemData = inform,
+        };
+
+        CreateItem(item);
+    }
+    public void RefreshItemInfo(ItemInform inform)
+    {
+        _itemDataList.Add(inform._itemData);
+        GameManager.Instance._saveManager.SaveItemInfos(_itemDataList);
+    }
+    public void CreateItem(ItemInform inform)
+    {
+        int itemIndex = inform._itemData._slotNumber;
+        GameObject obj = GameManager.Instance._itemManager.CreateItem(itemIndex);
+        obj.GetComponent<ItemInform>().SetItemInform(inform);
+
+        GameManager.Instance._saveManager.SaveItemInfos(_itemDataList);
+    }
+
+    public void DeleteItem(GameObject obj)
+    {
+        _itemDataList.Remove(obj.GetComponent<ItemInform>()._itemData);
+        MonoBehaviour.Destroy(obj);
+        GameManager.Instance._saveManager.SaveItemInfos(_itemDataList);
     }
 
 
@@ -146,10 +199,11 @@ public class UserSave
         _beeLvList[index] = value;
         GameManager.Instance._saveManager.SaveBeeInfos(_beeLvList);
     }
-    public int GetBeeLvList(int index)
+    public List<int> USER_BEELVLIST
     {
-        return _beeLvList[index];
+        get => _beeLvList;
     }
+
     [SerializeField] private List<int> _shopItemLvList = new List<int>();
 
     public void ChangeShopItemInfo(int index, int value)
@@ -157,9 +211,10 @@ public class UserSave
         _shopItemLvList[index] = value;
         GameManager.Instance._saveManager.SaveShopItemInfos(_shopItemLvList);
     }
-    public int GetShopItemLvList(int index)
+
+    public List<int> USER_SHOPITEMLVLIST
     {
-        return _shopItemLvList[index];
+        get => _shopItemLvList;
     }
 
     /// <summary>
@@ -168,7 +223,7 @@ public class UserSave
     /// <returns></returns>
     public bool IsCanBuildBee()
     {
-        if (_towerInformList.Count < _maxBeeCount) return true;
+        if (_towerDataList.Count < _maxBeeCount) return true;
 
         return false;
     }
@@ -184,11 +239,15 @@ public class UserSave
         USER_MAXBEECOUNT = 5;
 
         PlayerPrefs.DeleteKey("TowerInfoJsonStr");
+        PlayerPrefs.DeleteKey("ItemInfoJsonStr");
         PlayerPrefs.DeleteKey("BeeInfoJsonStr");
         PlayerPrefs.DeleteKey("ShopItemJsonStr");
 
-        _towerInformList.Clear();
-        GameManager.Instance._saveManager.SaveTowerInfos(_towerInformList);
+        _towerDataList.Clear();
+        GameManager.Instance._saveManager.SaveTowerInfos(_towerDataList);
+
+        _itemDataList.Clear();
+        GameManager.Instance._saveManager.SaveItemInfos(_itemDataList);
 
         _beeLvList.Clear();
         _beeLvList.Add(1);
@@ -208,7 +267,7 @@ public class UserSave
 
     public UserSave() { }
 
-    public UserSave(string userName, int hasMoney, int currentHoney, int maxHoney, int currentEgg, int maxEgg, int maxBee, List<TowerData> towerInfos, List<int> beeInfos, List<int> shopItemInfos)
+    public UserSave(string userName, int hasMoney, int currentHoney, int maxHoney, int currentEgg, int maxEgg, int maxBee, List<ItemData> towerInfos, List<ItemData> itemInfos, List<int> beeInfos, List<int> shopItemInfos)
     {
         _userName = userName;
         _hasMoney = hasMoney;
@@ -218,17 +277,30 @@ public class UserSave
         _maxEgg = maxEgg;
         _maxBeeCount = maxBee;
 
-        _towerInformList = towerInfos;
-        if (_towerInformList == null)
+        _towerDataList = towerInfos;
+        if (_towerDataList == null)
         {
-            _towerInformList = new List<TowerData>();
+            _towerDataList = new List<ItemData>();
         }
         else
         {
             // 타워 초기 생성
-            for (int i = 0; i < _towerInformList.Count; i++)
-                CreateTower(_towerInformList[i]);
+            for (int i = 0; i < _towerDataList.Count; i++)
+                RefreshTowerInfo(_towerDataList[i]);
         }
+
+        _itemDataList = itemInfos;
+        if (_itemDataList == null)
+        {
+            _itemDataList = new List<ItemData>();
+        }
+        else
+        {
+            // 아이템 초기 생성
+            for (int i = 0; i < _itemDataList.Count; i++)
+                RefreshItemInfo(_itemDataList[i]);
+        }
+
 
         _beeLvList = beeInfos;
         if (_beeLvList == null)
@@ -241,8 +313,5 @@ public class UserSave
         {
             _shopItemLvList = new List<int>();
         }
-
     }
-
-
 }

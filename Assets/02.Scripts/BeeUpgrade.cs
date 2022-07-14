@@ -15,7 +15,7 @@ public class BeeUpgrade : IShopItem
 
     public int GetPrice()
     {
-        price = defaultPrice + (bee.level - 1) * 10;
+        price = Mathf.RoundToInt(defaultPrice + ((defaultPrice * (level - 1)) * 0.45f));
         level = bee.level;
 
         return price;

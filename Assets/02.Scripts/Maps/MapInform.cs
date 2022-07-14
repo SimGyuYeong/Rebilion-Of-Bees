@@ -7,6 +7,4 @@ public class MapInform : MonoBehaviour
     public int _mapNumber;
 
     public bool _isWay;
-
-
 }

@@ -13,8 +13,6 @@ public class SaveManager : MonoBehaviour
     private void Start()
     {
         _isLoad = false;
-        
-
     }
 
     public void Update()
@@ -25,7 +23,7 @@ public class SaveManager : MonoBehaviour
             _isLoad = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             ResetSaveFile();
         }
@@ -44,6 +42,7 @@ public class SaveManager : MonoBehaviour
 
         string name = PlayerPrefs.GetString("UserName", "");
         int hasMoney = PlayerPrefs.GetInt("HasMoney", 0);
+        int hasRoyalJelly = PlayerPrefs.GetInt("RoyalJelly", 0);
         int currentHoney = PlayerPrefs.GetInt("CurrentHoney", 0);
         int maxHoney = PlayerPrefs.GetInt("MaxHoney", 0);
         int currentEgg = PlayerPrefs.GetInt("CurrentEgg", 0);
@@ -51,7 +50,10 @@ public class SaveManager : MonoBehaviour
         int maxBeeCount = PlayerPrefs.GetInt("MaxBeeCount", 0);
 
         string towerInfoJsonStr = PlayerPrefs.GetString("TowerInfoJsonStr", "");
-        var towerInfos = JsonConvert.DeserializeObject<List<TowerData>>(towerInfoJsonStr);
+        var towerInfos = JsonConvert.DeserializeObject<List<ItemData>>(towerInfoJsonStr);
+
+        string itemInfoJsonStr = PlayerPrefs.GetString("ItemInfoJsonStr", "");
+        var itemInfos = JsonConvert.DeserializeObject<List<ItemData>>(itemInfoJsonStr);
 
         string beeInfoJsonStr = PlayerPrefs.GetString("BeeInfoJsonStr", "");
         var beeInfos = JsonConvert.DeserializeObject<List<int>>(beeInfoJsonStr);
@@ -59,7 +61,7 @@ public class SaveManager : MonoBehaviour
         string shopItemInfoJsonStr = PlayerPrefs.GetString("ShopItemJsonStr", "");
         var shopItemInfos = JsonConvert.DeserializeObject<List<int>>(shopItemInfoJsonStr);
 
-        _userSave = new UserSave(name, hasMoney, currentHoney, maxHoney, currentEgg, maxEgg, maxBeeCount, towerInfos, beeInfos, shopItemInfos);
+        _userSave = new UserSave(name, hasMoney, currentHoney, maxHoney, currentEgg, maxEgg, maxBeeCount, towerInfos, itemInfos, beeInfos, shopItemInfos);
     }
 
     public void SaveUserName(string value)
@@ -69,6 +71,10 @@ public class SaveManager : MonoBehaviour
     public void SaveHasMoney(int value)
     {
         PlayerPrefs.SetInt("HasMoney", value);
+    }
+    public void SaveRoyalJelly(int value)
+    {
+        PlayerPrefs.SetInt("RoyalJelly", value);
     }
     public void SaveCurrentHoney(int value)
     {
@@ -90,12 +96,16 @@ public class SaveManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("MaxBeeCount", value);
     }
-    public void SaveTowerInfos(List<TowerData> value)
+    public void SaveTowerInfos(List<ItemData> value)
     {
         var jsonStr = JsonConvert.SerializeObject(value);
         PlayerPrefs.SetString("TowerInfoJsonStr", jsonStr);
     }
-
+    public void SaveItemInfos(List<ItemData> value)
+    {
+        var jsonStr = JsonConvert.SerializeObject(value);
+        PlayerPrefs.SetString("ItemInfoJsonStr", jsonStr);
+    }
     public void SaveBeeInfos(List<int> value)
     {
         var jsonStr = JsonConvert.SerializeObject(value);

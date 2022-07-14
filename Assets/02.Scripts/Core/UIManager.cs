@@ -32,7 +32,6 @@ public class UIManager : MonoSingleton<UIManager>
     private void Start()
     {
         stage = 1;
-        royal = 1;
 
         TopPanelUpdate();
         BeeSpawnDelayCntUpdate();
@@ -74,7 +73,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void RoyalValueUpdate()
     {
-        _royalText.text = GetUnit(royal);
+        _royalText.text = GetUnit(GameManager.Instance._saveManager._userSave.USER_HASROYALJELLY);
         Sequence seq = DOTween.Sequence();
         seq.Append(_royalText.transform.DOScale(Vector3.one * 1.2f, .2f));
         seq.Append(_royalText.transform.DOScale(Vector3.one, .2f));
@@ -147,10 +146,5 @@ public class UIManager : MonoSingleton<UIManager>
         string retStr = "";
         for (int i = 0; i < repeatCount; i++) retStr += (char)(65 + index % 26);
         return retStr;
-    }
-
-    public void ButtonTest()
-    {
-        Debug.Log("Button Clicked!");
     }
 }
