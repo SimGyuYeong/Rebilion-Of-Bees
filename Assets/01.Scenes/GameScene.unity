@@ -13393,7 +13393,7 @@ MonoBehaviour:
   - _spawns:
     - _monster: {fileID: 474088494520996202, guid: bf4aace94f90ca24c9d4f0ee899f2dff, type: 3}
       _spawnDelay: 1
-    - _monster: {fileID: 474088494520996202, guid: bf4aace94f90ca24c9d4f0ee899f2dff, type: 3}
+    - _monster: {fileID: 474088494520996202, guid: 6e55001fe45479e43ac9c26589aab1c1, type: 3}
       _spawnDelay: 2
   _isSpawning: 0
   _spawnTransform: {fileID: 986410026}
